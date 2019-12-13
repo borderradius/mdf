@@ -1,9 +1,6 @@
 module.exports = {
   mode: 'spa',
   srcDir: 'client',
-  /*
-   ** Headers of the page
-   */
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -17,55 +14,35 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
-  /*
-   ** Customize the progress-bar color
-   */
   loading: { color: '#fff' },
-  /*
-   ** Global CSS
-   */
-  css: [],
-  /*
-   ** Plugins to load before mounting the App
-   */
+  css: ['~assets/css/tailwind.css', '~assets/scss/index.scss'],
   plugins: [],
-  /*
-   ** Nuxt.js dev-modules
-   */
   buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
-    // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss',
     '@nuxt/typescript-build',
+    '@nuxtjs/tailwindcss',
   ],
-  /*
-   ** Nuxt.js modules
-   */
-  modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-  ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {
-    baseURL: process.env.API_URL || 'http://192.168.1.121:8081',
+  tailwindcss: {
+    configPath: './tailwind.config.js',
+    cssPath: './assets/css/tailwind.css',
   },
-  /*
-   ** Build configuration
-   */
+  modules: ['@nuxtjs/axios'],
+  // webfontloader: {
+  //   google: {
+  //     gamilies: ['Lato:400, 700'],
+  //   },
+  // },
+  axios: {
+    // baseURL: process.env.API_URL || 'http://blockchain.minigate.kr:8081',
+    baseURL: process.env.API_URL || 'http://sample.bmaster.kro.kr/',
+  },
   build: {
-    /*
-     ** You can extend webpack config here
-     */
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
-          test: /\.(js|vue)$/,
+          test: /\.(ts|js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/,
         });

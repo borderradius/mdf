@@ -1,14 +1,14 @@
 module.exports = {
   apps: [
     {
-      name: 'nuxt-ts',
+      name: 'env-ts',
       cwd: __dirname,
       script: './server',
       env: {
         NODE_ENV: 'production',
         HOST: '0.0.0.0',
         PORT: '4444',
-        API_URL: 'http://192.168.1.121:8081',
+        API_URL: 'http://sample.bmaster.kro.kr/',
       },
       watch: true,
       exec_mode: 'cluster',
