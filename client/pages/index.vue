@@ -15,7 +15,7 @@
             class="mt-6 text-2xl font-bold text-gray-900 leading-tight sm:mt-8 sm:text-4xl lg:text-3xl xl:text-4xl"
           >
             You can work from anywhere. <br class="hidden lg:inline" />
-            <span class="text-indigo-500">Take advantage of it.</span>
+            <span class="text-brand-blue">Take advantage of it.</span>
           </h1>
           <p class="mt-2 text-gray-600 sm:text-xl sm:mt-4">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
