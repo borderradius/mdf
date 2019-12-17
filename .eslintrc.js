@@ -55,7 +55,8 @@ module.exports = {
         ],
       },
     ],
-    "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }]
+    "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false, "caughtErrors": "none" }]
+    // "no-unused-vars": ["error", { "varsIgnorePattern": "^map" }]
   },
 
   // nuxt package import setting
@@ -65,7 +66,7 @@ module.exports = {
     'import/resolver': {
       nuxt: {
         nuxtSrcDir: 'client',
-        extensions: ['.js', '.vue'],
+        extensions: ['.ts', '.js', '.vue'],
       },
     },
   },

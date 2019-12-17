@@ -37,6 +37,7 @@
         />
       </div>
     </div>
+    <test :property="property" class="my-3" />
     <!-- <div class="my-10">
       <h1>{{ title }}</h1>
       <test />
@@ -61,6 +62,8 @@
 import { Vue, Component } from 'vue-property-decorator';
 import { State, Action } from 'vuex-class';
 import test from '../components/test.vue';
+// eslint-disable-next-line no-unused-vars
+import { User, House } from '../types/index';
 
 @Component({
   // asyncData & fetch 컴포넌트에 입력
@@ -81,10 +84,23 @@ export default class extends Vue {
   @Action('contents/delContact') delContact: any;
 
   title: string = 'This is index';
-  userInfo: Object = {
+  userInfo: User = {
     name: 'test',
     tel: '010-0000-0000',
     address: '독도는 우리땅',
+  };
+
+  property: House = {
+    imageUrl:
+      'https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+    imageAlt: 'modern house',
+    beds: 3,
+    baths: 2,
+    title: 'Modern exclutive home in the heart of historic Los Angeles',
+    priceInCents: 190000,
+    formattedPrice: '$1,900.00',
+    reviewCount: 34,
+    rating: 4,
   };
 
   created() {
