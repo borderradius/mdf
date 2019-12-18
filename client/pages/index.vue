@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="flex bg-gray-100">
+    <!-- <div class="flex bg-gray-100">
       <div
         class="p-8 py-12 bg-white max-w-md mx-auto sm:max-w-xl lg:max-w-full lg:w-1/2 lg:py-24 lg:px-12"
       >
@@ -36,7 +36,7 @@
           alt="woman"
         />
       </div>
-    </div>
+    </div> -->
     <test :property="property" class="my-3" />
     <!-- <div class="my-10">
       <h1>{{ title }}</h1>

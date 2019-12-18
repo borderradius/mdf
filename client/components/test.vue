@@ -1,6 +1,19 @@
 <template>
-  <div class="bg-white border rounded-lg w-1/4 overflow-hidden">
-    <img :src="houseInfo.imageUrl" :alt="houseInfo.imageAlt" />
+  <div class="bg-white border rounded-lg overflow-hidden">
+    <div class="relative pb-2/3">
+      <!-- not support IE11 -->
+      <img
+        :src="houseInfo.imageUrl"
+        :alt="houseInfo.imageAlt"
+        class="absolute h-full w-full object-cover"
+      />
+    </div>
+    <!-- support IE11 -->
+    <!-- <div
+      :style="{ backgroundImage: `url('${property.imageUrl}')` }"
+      class="h-48 bg-cover bg-center"
+    /> -->
+
     <div class="p-6">
       <div class="flex items-center">
         <span
