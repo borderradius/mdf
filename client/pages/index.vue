@@ -37,7 +37,7 @@
         />
       </div>
     </div> -->
-    <test :property="property" class="my-3" />
+    <!-- <test :property="property" class="my-3" /> -->
     <!-- <div class="my-10">
       <h1>{{ title }}</h1>
       <test />
@@ -75,6 +75,7 @@ import { User, House } from '../types/index';
   // },
   components: {
     test,
+    // navbar,
   },
 })
 export default class extends Vue {
