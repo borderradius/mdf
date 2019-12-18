@@ -49,14 +49,20 @@
         class="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2"
         >Messages</a
       >
+      <accountDropdown class="ml-6" />
     </div>
   </header>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import accountDropdown from './accountDropdown.vue';
 
-@Component({})
+@Component({
+  components: {
+    accountDropdown,
+  },
+})
 export default class NavbarComponent extends Vue {
   isOpen: boolean = false;
 }
