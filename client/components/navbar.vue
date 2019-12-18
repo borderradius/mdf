@@ -30,27 +30,47 @@
         </button>
       </div>
     </div>
-    <div
-      :class="isOpen ? 'block' : 'hidden'"
-      class="px-2 pt-2 pb-4 sm:flex sm:p-0"
-    >
-      <a
-        href="#!"
-        class="block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800"
-        >List your property</a
-      >
-      <a
-        href="#!"
-        class="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2"
-        >Trips</a
-      >
-      <a
-        href="#!"
-        class="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2"
-        >Messages</a
-      >
-      <accountDropdown class="ml-6" />
-    </div>
+    <nav :class="isOpen ? 'block' : 'hidden'" class="sm:block">
+      <div class="px-2 pt-2 pb-4 sm:flex sm:p-0">
+        <a
+          href="#!"
+          class="block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800"
+          >List your property</a
+        >
+        <a
+          href="#!"
+          class="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2"
+          >Trips</a
+        >
+        <a
+          href="#!"
+          class="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2"
+          >Messages</a
+        >
+        <accountDropdown class="hidden sm:block sm:ml-6" />
+      </div>
+      <div class="px-4 py-5 relative border-t border-gray-800 sm:hidden">
+        <div @click="isOpen = !isOpen" class="flex items-center">
+          <img
+            class="h-8 w-8 border-2 border-gray-600 rounded-full object-cover"
+            src="https://i.pinimg.com/originals/c8/14/99/c814995b86a60232c93492f5c90c0570.jpg"
+            alt="avatar"
+          />
+          <span class="ml-3 font-semibold text-white">Lee Ji Eun</span>
+        </div>
+        <div class="mt-4">
+          <a href="#!" class="block text-gray-400 hover:text-white"
+            >Account settings</a
+          >
+          <a href="#!" class="mt-2 block text-gray-400 hover:text-white"
+            >Support</a
+          >
+          <a href="#!" class="mt-2 block text-gray-400 hover:text-white"
+            >Sign out</a
+          >
+        </div>
+      </div>
+    </nav>
   </header>
 </template>
 
