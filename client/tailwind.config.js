@@ -4,7 +4,7 @@ module.exports = {
   separator: ':',
   theme: {
     container: {
-      center: true,
+      center: false,
     },
     extend: {
       colors: {
@@ -45,5 +45,5 @@ module.exports = {
     backgroundColor: ['responsive', 'hover', 'focus', 'active'],
     fontSize: ['responsive', 'hover'],
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/custom-forms')],
 };

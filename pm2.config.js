@@ -7,7 +7,7 @@ module.exports = {
       env: {
         NODE_ENV: 'production',
         HOST: '0.0.0.0',
-        PORT: '4444',
+        PORT: '8484',
         API_URL: 'http://sample.bmaster.kro.kr/',
       },
       watch: true,

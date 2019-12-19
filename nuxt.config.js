@@ -16,7 +16,7 @@ module.exports = {
   },
   loading: { color: '#fff' },
   css: ['~assets/css/tailwind.css', '~assets/scss/index.scss'],
-  plugins: [],
+  plugins: [{ src: '~/plugins/vue-js-modal', ssr: false }],
   buildModules: [
     '@nuxtjs/eslint-module',
     '@nuxt/typescript-build',

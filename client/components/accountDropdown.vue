@@ -13,14 +13,14 @@
     <button
       v-if="isOpen"
       @click="isOpen = false"
-      class="fixed inset-0 h-full w-full bg-black opacity-50 cursor-default"
+      class="fixed inset-0 z-10 h-full w-full bg-black opacity-50 cursor-default"
       tabindex="-1"
     />
     <div
       v-if="isOpen"
-      class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl"
+      class="absolute right-0 mt-2 py-2 w-48 z-10 bg-white rounded-lg shadow-xl"
     >
-      <a
+      <!-- <a
         href="#!"
         class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
         >Account settings</a
@@ -29,9 +29,10 @@
         href="#!"
         class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
         >Support</a
-      >
+      > -->
       <a
-        href="#!"
+        @click="open"
+        href="javascript:;"
         class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
         >Sign out</a
       >
@@ -62,6 +63,11 @@ export default class AccountDropdownComponent extends Vue {
     this.$once('hook:beforeDestroy', () => {
       document.removeEventListener('keydown', handleEscape);
     });
+  }
+
+  open() {
+    this.isOpen = false;
+    this.$router.push('signin');
   }
 }
 </script>

@@ -1,10 +1,13 @@
 <template>
   <header
-    class="bg-gray-900 sm:flex sm:justify-between sm:px-4 sm:py-3 sm:items-center"
+    class="h-16 bg-white border-b border-gray-200 sm:flex sm:justify-between sm:px-4 sm:py-3 sm:items-center"
   >
     <div class="flex items-center justify-between px-4 py-3 sm:p-0">
       <div>
-        <img class="h-8" src="~assets/img/logo.svg" alt="logo" />
+        <h1 class="font-bold text-center text-md">
+          Minigate Digital contents Framework
+        </h1>
+        <!-- <img class="h-8" src="~assets/img/logo.svg" alt="logo" /> -->
       </div>
       <div class="sm:hidden">
         <button
@@ -32,21 +35,21 @@
     </div>
     <nav :class="isOpen ? 'block' : 'hidden'" class="sm:block">
       <div class="px-2 pt-2 pb-4 sm:flex sm:p-0">
-        <a
+        <!-- <a
           href="#!"
-          class="block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800"
+          class="block px-2 py-1 text-gray-800 font-semibold rounded hover:bg-gray-800 hover:text-white"
           >List your property</a
         >
         <a
           href="#!"
-          class="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2"
+          class="mt-1 block px-2 py-1 text-gray-800 font-semibold rounded hover:bg-gray-800 hover:text-white sm:mt-0 sm:ml-2"
           >Trips</a
         >
         <a
           href="#!"
-          class="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2"
+          class="mt-1 block px-2 py-1 text-gray-800 font-semibold rounded hover:bg-gray-800 hover:text-white sm:mt-0 sm:ml-2"
           >Messages</a
-        >
+        > -->
         <accountDropdown class="hidden sm:block sm:ml-6" />
       </div>
       <div class="px-4 py-5 relative border-t border-gray-800 sm:hidden">
@@ -59,13 +62,16 @@
           <span class="ml-3 font-semibold text-white">Lee Ji Eun</span>
         </div>
         <div class="mt-4">
-          <a href="#!" class="block text-gray-400 hover:text-white"
+          <!-- <a href="#!" class="block text-gray-400 hover:text-white"
             >Account settings</a
           >
           <a href="#!" class="mt-2 block text-gray-400 hover:text-white"
             >Support</a
-          >
-          <a href="#!" class="mt-2 block text-gray-400 hover:text-white"
+          > -->
+          <a
+            @click="goSignout"
+            href="javascript:;"
+            class="mt-2 block text-gray-400 hover:text-white"
             >Sign out</a
           >
         </div>
@@ -85,6 +91,10 @@ import accountDropdown from './accountDropdown.vue';
 })
 export default class NavbarComponent extends Vue {
   isOpen: boolean = false;
+
+  goSignout() {
+    this.$router.push('signin');
+  }
 }
 </script>
 

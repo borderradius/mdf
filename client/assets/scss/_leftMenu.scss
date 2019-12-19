@@ -1,0 +1,10 @@
+#leftMenu {
+  position: fixed;
+}
+#leftMenu-content {
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none !important;
+  }
+  height: calc(100vh - 8rem);
+}

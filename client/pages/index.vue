@@ -1,6 +1,27 @@
 <template>
-  <div class="container">
-    <!-- <div class="flex bg-gray-100">
+  <div>
+    <h5
+      class="mb-4 text-gray-500 uppercase tracking-wide font-bold text-sm px-4"
+    >
+      Contents
+    </h5>
+    <ul class="overflow-hidden">
+      <li v-for="i in 12" :key="i" class="w-1/4 px-4 float-left mb-6">
+        <card :property="property" :idx="i" />
+      </li>
+      <!-- <li class="w-1/4 px-4">
+        <card :property="property" />
+      </li>
+      <li class="w-1/4 px-4">
+        <card :property="property" />
+      </li>
+      <li class="w-1/4 px-4">
+        <card :property="property" />
+      </li> -->
+    </ul>
+  </div>
+  <!-- <div class="container"> -->
+  <!-- <div class="flex bg-gray-100">
       <div
         class="p-8 py-12 bg-white max-w-md mx-auto sm:max-w-xl lg:max-w-full lg:w-1/2 lg:py-24 lg:px-12"
       >
@@ -37,31 +58,30 @@
         />
       </div>
     </div> -->
-    <!-- <test :property="property" class="my-3" /> -->
-    <!-- <div class="my-10">
-      <h1>{{ title }}</h1>
-      <test />
-      <hr />
-      <button @click="addInfo" class="btn btn-blue">
-        add info
-      </button>
-      <button class="btn btn-gray">hahah</button>
-      <ul>
-        <li v-for="(list, index) in lists" :key="index">
-          {{ list.name }}, {{ list.tel }}
-          <button @click="delInfo(list.no)" class="btn btn-red">
-            delete
-          </button>
-        </li>
-      </ul>
-    </div> -->
-  </div>
+  <!-- <card :property="property" class="my-3" /> -->
+  <!-- <div>
+    <h1>{{ title }}</h1>
+    <hr />
+    <button @click="addInfo" class="btn btn-blue">
+      add info
+    </button>
+    <button class="btn btn-gray">hahah</button>
+    <ul>
+      <li v-for="(list, index) in lists" :key="index">
+        {{ list.name }}, {{ list.tel }}
+        <button @click="delInfo(list.no)" class="btn btn-red">
+          delete
+        </button>
+      </li>
+    </ul>
+  </div> -->
+  <!-- </div> -->
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { State, Action } from 'vuex-class';
-import test from '../components/test.vue';
+import card from '../components/card.vue';
 // eslint-disable-next-line no-unused-vars
 import { User, House } from '../types/index';
 
@@ -74,7 +94,7 @@ import { User, House } from '../types/index';
   //   console.log(ctx);
   // },
   components: {
-    test,
+    card,
     // navbar,
   },
 })
@@ -93,7 +113,7 @@ export default class extends Vue {
 
   property: House = {
     imageUrl:
-      'https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+      'http://www.cjem.net/resources/img/201812/english_gem_slider_03.jpg',
     imageAlt: 'modern house',
     beds: 3,
     baths: 2,
