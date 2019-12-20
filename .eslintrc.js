@@ -5,8 +5,8 @@ module.exports = {
     node: true
   },
   parserOptions: {
-    parser: '@typescript-eslint/parser'
-    // parser: 'babel-eslint'
+    // parser: '@typescript-eslint/parser'
+    parser: 'babel-eslint'
   },
   extends: [
     '@nuxtjs',
@@ -66,7 +66,7 @@ module.exports = {
     'import/resolver': {
       nuxt: {
         nuxtSrcDir: 'client',
-        extensions: ['.ts', '.js', '.vue'],
+        extensions: ['.js', '.vue'],
       },
     },
   },
