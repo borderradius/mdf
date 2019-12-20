@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'env-ts',
+      name: 'MDF',
       cwd: __dirname,
       script: './server',
       env: {

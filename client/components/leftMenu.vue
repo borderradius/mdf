@@ -186,13 +186,9 @@
 
 <script>
 import {
-  // eslint-disable-next-line no-unused-vars
   project,
-  // eslint-disable-next-line no-unused-vars
   contentsType,
-  // eslint-disable-next-line no-unused-vars
   contentsElements,
-  // eslint-disable-next-line no-unused-vars
   contentsFields,
 } from '../static/leftMenu.js';
 
@@ -215,19 +211,10 @@ export default {
       return res;
     },
     allCheckChange(e) {
-      // const target = document.getElementsByClassName(e.target.name);
-      const target = document.getElementsByClassName(`.${e.target.name}`);
-      console.log(target);
-      // target.forEach(a => {
-      //   console.log(e.target.checked);
-      //   a.setAttribute('checked', e.target.checked);
-      // });
-      // const target = document.getElementsByName(e.target.name);
-      // const iter = target[Symbol.iterator]();
-      // iter.next();
-      // for (const a of iter) {
-      //   a.checked = e.target.checked;
-      // }
+      const iter = document.getElementsByName(e.target.name);
+      for (const a of iter) {
+        a.checked = e.target.checked;
+      }
     },
     /**
      * 체크박스 다 선택하면 모두체크박스 true
