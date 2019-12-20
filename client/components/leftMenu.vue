@@ -203,7 +203,7 @@ export default {
   },
 
   methods: {
-    filter(f, iter) {
+    filter(iter, f) {
       const res = [];
       for (const a of iter) {
         if (f(a)) res.push(a);
@@ -226,7 +226,7 @@ export default {
       const elements = document.getElementsByName(e.target.name);
       const iter = elements[Symbol.iterator]();
       iter.next();
-      const trueLength = this.filter(c => c.checked, iter).length;
+      const trueLength = this.filter(iter, c => c.checked).length;
 
       if (trueLength === elements.length - 1) {
         elements[0].checked = true;
