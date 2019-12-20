@@ -44,7 +44,7 @@
               <input
                 @change="checkChange"
                 type="checkbox"
-                class="form-checkbox"
+                class="form-checkbox project"
                 name="project"
               />
               <span class="ml-2 text-sm uppercase">{{ p }}</span>
@@ -219,12 +219,19 @@ export default class LeftMenuComponent extends Vue {
 
   // 모두선택 체크박스
   allCheckChange(e: any) {
-    const target = document.getElementsByName(e.target.name);
-    const iter = target[Symbol.iterator]();
-    iter.next();
-    for (const a of iter) {
-      a.checked = e.target.checked;
-    }
+    // const target = document.getElementsByClassName(e.target.name);
+    const target = document.getElementsByClassName(`.${e.target.name}`);
+    console.log(target);
+    // target.forEach(a => {
+    //   console.log(e.target.checked);
+    //   a.setAttribute('checked', e.target.checked);
+    // });
+    // const target = document.getElementsByName(e.target.name);
+    // const iter = target[Symbol.iterator]();
+    // iter.next();
+    // for (const a of iter) {
+    //   a.checked = e.target.checked;
+    // }
   }
 
   /**
@@ -234,7 +241,7 @@ export default class LeftMenuComponent extends Vue {
     const elements = document.getElementsByName(e.target.name);
     const iter = elements[Symbol.iterator]();
     iter.next();
-    const trueLength = this.filter(c => c.checked, iter).length;
+    const trueLength = this.filter((c: any) => c.checked, iter).length;
 
     if (trueLength === elements.length - 1) {
       elements[0].checked = true;
