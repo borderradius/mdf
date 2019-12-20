@@ -40,36 +40,33 @@
   </div>
 </template>
 
-<script lang="ts">
-// eslint-disable-next-line no-unused-vars
-import { Vue, Component, Prop, PropSync } from 'vue-property-decorator';
-// eslint-disable-next-line no-unused-vars
-import { State, Action } from 'vuex-class';
-
-@Component({})
-export default class AccountDropdownComponent extends Vue {
-  // @Prop({ type: propType }) private propName!: propType;
-  // @PropSync('propName', { type: propType }) newPropName!: propType;
-  isOpen: boolean = false;
+<script>
+export default {
+  data() {
+    return {
+      isOpen: false,
+    };
+  },
 
   created() {
-    const handleEscape = (e: any) => {
-      if (e.key === 'Esc' || e.key === 'Escape') {
-        this.isOpen = false;
-      }
-    };
+    // const handleEscape = (e: any) => {
+    //   if (e.key === 'Esc' || e.key === 'Escape') {
+    //     this.isOpen = false;
+    //   }
+    // };
+    // document.addEventListener('keydown', handleEscape);
+    // this.$once('hook:beforeDestroy', () => {
+    //   document.removeEventListener('keydown', handleEscape);
+    // });
+  },
 
-    document.addEventListener('keydown', handleEscape);
-    this.$once('hook:beforeDestroy', () => {
-      document.removeEventListener('keydown', handleEscape);
-    });
-  }
-
-  open() {
-    this.isOpen = false;
-    this.$router.push('signin');
-  }
-}
+  methods: {
+    open() {
+      this.isOpen = false;
+      this.$router.push('signin');
+    },
+  },
+};
 </script>
 
 <style scoped lang="sass"></style>

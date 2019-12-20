@@ -78,66 +78,30 @@
   <!-- </div> -->
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-// import { State, Action } from 'vuex-class';
+<script>
 import card from '../components/card.vue';
-// eslint-disable-next-line no-unused-vars
-import { User, House, Products } from '../types/index';
 
-@Component({
-  // asyncData & fetch 컴포넌트에 입력
-  // async asyncData(ctx: any) {
-  //   await ctx.store.dispatch('contents/lists');
-  // },
-  // asyncData(ctx) {
-  //   console.log(ctx);
-  // },
+export default {
   components: {
     card,
-    // navbar,
   },
-})
-export default class extends Vue {
-  // @State(state => state.contents.lists) lists!: any;
-  // @Action('contents/lists') loadLists: any;
-  // @Action('contents/addContact') addContact: any;
-  // @Action('contents/delContact') delContact: any;
-
-  title: string = 'This is index';
-  userInfo: User = {
-    name: 'test',
-    tel: '010-0000-0000',
-    address: '독도는 우리땅',
-  };
-
-  property: House = {
-    imageUrl:
-      'http://www.cjem.net/resources/img/201812/english_gem_slider_03.jpg',
-    imageAlt: 'modern house',
-    beds: 3,
-    baths: 2,
-    title: 'Modern exclutive home in the heart of historic Los Angeles',
-    priceInCents: 190000,
-    formattedPrice: '$1,900.00',
-    reviewCount: 34,
-    rating: 4,
-  };
-
-  products: Products = [
-    { name: 'half shirt1', price: 15000 },
-    { name: 'half shirt2', price: 20000 },
-    { name: 'half shirt3', price: 25000 },
-    { name: 'half shirt4', price: 15000 },
-    { name: 'half shirt5', price: 30000 },
-  ];
-
-  // addInfo() {
-  //   this.addContact(this.userInfo);
-  // }
-
-  // delInfo(userInfoNo: Number) {
-  //   this.delContact(userInfoNo);
-  // }
-}
+  data() {
+    return {
+      property: {
+        imageUrl:
+          'http://www.cjem.net/resources/img/201812/english_gem_slider_03.jpg',
+        imageAlt: 'modern house',
+        beds: 3,
+        baths: 2,
+        title: 'Modern exclutive home in the heart of historic Los Angeles',
+        priceInCents: 190000,
+        formattedPrice: '$1,900.00',
+        reviewCount: 34,
+        rating: 4,
+      },
+    };
+  },
+};
 </script>
+
+<style lang="scss" scoped></style>

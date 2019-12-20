@@ -22,10 +22,6 @@
       "language": "javascript",
       "autoFix": true
     },
-    {
-      "language": "typescript",
-      "autoFix": true
-    },
   ],
   "advancedNewFile.exclude": {
     "node_modules": true,

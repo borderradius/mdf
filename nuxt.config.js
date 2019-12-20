@@ -17,11 +17,7 @@ module.exports = {
   loading: { color: '#fff' },
   css: ['~assets/css/tailwind.css', '~assets/scss/index.scss'],
   plugins: [{ src: '~/plugins/vue-js-modal', ssr: false }],
-  buildModules: [
-    '@nuxtjs/eslint-module',
-    '@nuxt/typescript-build',
-    '@nuxtjs/tailwindcss',
-  ],
+  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss'],
   tailwindcss: {
     configPath: './tailwind.config.js',
     cssPath: './assets/css/tailwind.css',
@@ -74,7 +70,7 @@ module.exports = {
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
-          test: /\.(ts|js|vue)$/,
+          test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/,
         });

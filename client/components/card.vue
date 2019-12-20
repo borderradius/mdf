@@ -3,8 +3,8 @@
     <div class="relative pb-5/6">
       <!-- not support IE11 -->
       <img
-        :src="houseInfo.imageUrl"
-        :alt="houseInfo.imageAlt"
+        :src="property.imageUrl"
+        :alt="property.imageAlt"
         class="absolute h-full w-full object-cover rounded-lg shadow-md"
       />
     </div>
@@ -23,14 +23,14 @@
           <div
             class="ml-2 text-gray-600 text-sm uppercase font-semibold tracking-wide"
           >
-            {{ houseInfo.beds }} beds &bull; {{ houseInfo.baths }} baths
+            {{ property.beds }} beds &bull; {{ property.baths }} baths
           </div>
         </div>
         <h4 class="mt-1 font-semibold text-lg leading-tight truncate">
-          {{ houseInfo.title }}
+          {{ property.title }}
         </h4>
         <div class="mt-1">
-          {{ houseInfo.formattedPrice }}
+          {{ property.formattedPrice }}
           <span class="text-gray-600 text-sm">/ wk</span>
         </div>
         <div class="mt-2 flex items-center">
@@ -46,7 +46,7 @@
             />
           </svg>
           <span class="ml-2 text-gray-600 text-sm"
-            >{{ houseInfo.reviewCount }} reviews</span
+            >{{ property.reviewCount }} reviews</span
           >
         </div>
       </div>
@@ -65,17 +65,17 @@
           <div
             class="text-gray-600 text-sm uppercase font-semibold tracking-wide"
           >
-            <!-- {{ houseInfo.beds }} beds &bull; {{ houseInfo.baths }} baths -->
+            <!-- {{ property.beds }} beds &bull; {{ property.baths }} baths -->
             musical english
           </div>
         </div>
         <h4 class="mt-1 font-semibold text-lg leading-tight truncate">
-          <!-- {{ houseInfo.title }} -->
+          <!-- {{ property.title }} -->
           Sentence Building
         </h4>
         <div class="mt-1 text-gray-500 text-xs">
           Video / Animation
-          <!-- {{ houseInfo.formattedPrice }}
+          <!-- {{ property.formattedPrice }}
           <span class="text-gray-600 text-sm">/ wk</span> -->
         </div>
         <div class="mt-2">
@@ -91,7 +91,7 @@
             />
           </svg>
           <span class="ml-2 text-gray-600 text-sm"
-            >{{ houseInfo.reviewCount }} reviews</span
+            >{{ property.reviewCount }} reviews</span
           > -->
           <!-- <div>
             <span
@@ -152,22 +152,25 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component, PropSync, Prop } from 'vue-property-decorator';
-// eslint-disable-next-line no-unused-vars
-import { House } from '../types/index';
+<script>
+export default {
+  props: {
+    property: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+  },
 
-@Component({})
-export default class Test extends Vue {
-  @Prop({ type: Number }) private idx!: Number;
-  @PropSync('property', { type: Object }) houseInfo!: House;
-
-  show() {
-    if (this.idx === 1) {
-      this.$modal.show('hello-world');
-    }
-  }
-}
+  methods: {
+    show() {
+      if (this.idx === 1) {
+        this.$modal.show('hello-world');
+      }
+    },
+  },
+};
 </script>
 
 <style scoped></style>

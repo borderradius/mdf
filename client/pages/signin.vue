@@ -50,23 +50,15 @@
   </div>
 </template>
 
-<script lang="ts">
-// eslint-disable-next-line no-unused-vars
-import { Vue, Component, Prop, PropSync } from 'vue-property-decorator';
-// eslint-disable-next-line no-unused-vars
-import { State, Action } from 'vuex-class';
-
-@Component({
+<script>
+export default {
   layout: 'clear',
-})
-export default class SignInComponent extends Vue {
-  // @Prop({ type: propType }) private propName!: propType;
-  // @PropSync('propName', { type: propType }) newPropName!: propType;
-
-  goSignin() {
-    console.log('signin clicked');
-  }
-}
+  methods: {
+    goSignin() {
+      console.log('signin clicked');
+    },
+  },
+};
 </script>
 
 <style scoped lang="sass"></style>

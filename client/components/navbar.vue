@@ -80,22 +80,24 @@
   </header>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+<script>
 import accountDropdown from './accountDropdown.vue';
 
-@Component({
+export default {
   components: {
     accountDropdown,
   },
-})
-export default class NavbarComponent extends Vue {
-  isOpen: boolean = false;
-
-  goSignout() {
-    this.$router.push('signin');
-  }
-}
+  data() {
+    return {
+      isOpen: false,
+    };
+  },
+  methods: {
+    goSignout() {
+      this.$router.push('signin');
+    },
+  },
+};
 </script>
 
 <style scoped></style>

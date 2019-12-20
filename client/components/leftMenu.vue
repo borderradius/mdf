@@ -184,11 +184,7 @@
   </div>
 </template>
 
-<script lang="ts">
-// eslint-disable-next-line no-unused-vars
-import { Vue, Component, Prop, PropSync, Watch } from 'vue-property-decorator';
-// eslint-disable-next-line no-unused-vars
-import { State, Action } from 'vuex-class';
+<script>
 import {
   // eslint-disable-next-line no-unused-vars
   project,
@@ -200,56 +196,56 @@ import {
   contentsFields,
 } from '../static/leftMenu.js';
 
-@Component({})
-export default class LeftMenuComponent extends Vue {
-  // @Prop({ type: propType }) private propName!: propType;
-  // @PropSync('propName', { type: propType }) newPropName!: propType;
-  project: string[] = project;
-  contentsType: string[] = contentsType;
-  contentsElements: string[] = contentsElements;
-  contentsFields: string[] = contentsFields;
+export default {
+  data() {
+    return {
+      project,
+      contentsType,
+      contentsElements,
+      contentsFields,
+    };
+  },
 
-  filter = (f: Function, iter: []) => {
-    const res: [] = [];
-    for (const a of iter) {
-      if (f(a)) res.push(a);
-    }
-    return res;
-  };
+  methods: {
+    filter(f, iter) {
+      const res = [];
+      for (const a of iter) {
+        if (f(a)) res.push(a);
+      }
+      return res;
+    },
+    allCheckChange(e) {
+      // const target = document.getElementsByClassName(e.target.name);
+      const target = document.getElementsByClassName(`.${e.target.name}`);
+      console.log(target);
+      // target.forEach(a => {
+      //   console.log(e.target.checked);
+      //   a.setAttribute('checked', e.target.checked);
+      // });
+      // const target = document.getElementsByName(e.target.name);
+      // const iter = target[Symbol.iterator]();
+      // iter.next();
+      // for (const a of iter) {
+      //   a.checked = e.target.checked;
+      // }
+    },
+    /**
+     * 체크박스 다 선택하면 모두체크박스 true
+     */
+    checkChange(e) {
+      const elements = document.getElementsByName(e.target.name);
+      const iter = elements[Symbol.iterator]();
+      iter.next();
+      const trueLength = this.filter(c => c.checked, iter).length;
 
-  // 모두선택 체크박스
-  allCheckChange(e: any) {
-    // const target = document.getElementsByClassName(e.target.name);
-    const target = document.getElementsByClassName(`.${e.target.name}`);
-    console.log(target);
-    // target.forEach(a => {
-    //   console.log(e.target.checked);
-    //   a.setAttribute('checked', e.target.checked);
-    // });
-    // const target = document.getElementsByName(e.target.name);
-    // const iter = target[Symbol.iterator]();
-    // iter.next();
-    // for (const a of iter) {
-    //   a.checked = e.target.checked;
-    // }
-  }
-
-  /**
-   * 체크박스 다 선택하면 모두체크박스 true
-   */
-  checkChange(e: any) {
-    const elements = document.getElementsByName(e.target.name);
-    const iter = elements[Symbol.iterator]();
-    iter.next();
-    const trueLength = this.filter((c: any) => c.checked, iter).length;
-
-    if (trueLength === elements.length - 1) {
-      elements[0].checked = true;
-    } else {
-      elements[0].checked = false;
-    }
-  }
-}
+      if (trueLength === elements.length - 1) {
+        elements[0].checked = true;
+      } else {
+        elements[0].checked = false;
+      }
+    },
+  },
+};
 </script>
 
 <style scoped lang="sass"></style>

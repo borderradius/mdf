@@ -12,18 +12,16 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+<script>
 import navbar from '../components/navbar.vue';
 import leftMenu from '../components/leftMenu.vue';
 
-@Component({
+export default {
   components: {
     navbar,
     leftMenu,
   },
-})
-export default class extends Vue {}
+};
 </script>
 
 <style scoped></style>
