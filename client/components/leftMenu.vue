@@ -210,6 +210,9 @@ export default {
       }
       return res;
     },
+    /**
+     * allCheck button click event
+     */
     allCheckChange(e) {
       const iter = document.getElementsByName(e.target.name);
       for (const a of iter) {
@@ -217,7 +220,7 @@ export default {
       }
     },
     /**
-     * 체크박스 다 선택하면 모두체크박스 true
+     * individualCheck button click event
      */
     checkChange(e) {
       const elements = document.getElementsByName(e.target.name);
