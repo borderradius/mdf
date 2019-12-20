@@ -29,12 +29,12 @@ module.exports = {
   //   },
   // },
   axios: {
-    baseURL: process.env.API_URL || 'http://blockchain.minigate.kr:8081',
+    baseURL: process.env.API_URL || 'http://192.168.5.11:8485',
     // baseURL: process.env.API_URL || 'http://sample.bmaster.kro.kr/',
   },
   router: {
     // middleware: ['auth', 'route-info', 'study-authenticate', 'browser'],
-    middleware: ['auth'],
+    middleware: ['auth', 'router-info'],
   },
   auth: {
     // See https://auth.nuxtjs.org/reference/schemes
@@ -49,7 +49,7 @@ module.exports = {
         tokenType: 'Bearer',
         endpoints: {
           login: {
-            url: '/signin',
+            url: '/user/login',
             method: 'post',
             propertyName: 'result',
           },

@@ -31,7 +31,7 @@
         >Support</a
       > -->
       <a
-        @click="open"
+        @click="signout"
         href="javascript:;"
         class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
         >Sign out</a
@@ -61,8 +61,13 @@ export default {
   },
 
   methods: {
-    open() {
+    signout() {
       this.isOpen = false;
+      try {
+        this.$store.dispatch('user/logout');
+      } catch (e) {
+        console.log(e);
+      }
       this.$router.push('signin');
     },
   },

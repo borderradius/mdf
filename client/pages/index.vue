@@ -6,8 +6,12 @@
       Contents
     </h5>
     <ul class="overflow-hidden">
-      <li v-for="i in 12" :key="i" class="w-1/4 px-4 float-left mb-6">
-        <card :property="property" :idx="i" />
+      <li
+        v-for="(i, index) in property"
+        :key="index"
+        class="w-1/4 px-4 float-left mb-6"
+      >
+        <card :property="i" :idx="index" v-on:showPopup="detailView" />
       </li>
       <!-- <li class="w-1/4 px-4">
         <card :property="property" />
@@ -19,6 +23,9 @@
         <card :property="property" />
       </li> -->
     </ul>
+    <modal name="hello-world">
+      Hello, world!
+    </modal>
   </div>
   <!-- <div class="container"> -->
   <!-- <div class="flex bg-gray-100">
@@ -79,7 +86,9 @@
 </template>
 
 <script>
+import { contentsData } from '../static/data.js';
 import card from '../components/card.vue';
+import customModal from '../components/customModal.vue';
 
 export default {
   components: {
@@ -87,19 +96,36 @@ export default {
   },
   data() {
     return {
-      property: {
-        imageUrl:
-          'http://www.cjem.net/resources/img/201812/english_gem_slider_03.jpg',
-        imageAlt: 'modern house',
-        beds: 3,
-        baths: 2,
-        title: 'Modern exclutive home in the heart of historic Los Angeles',
-        priceInCents: 190000,
-        formattedPrice: '$1,900.00',
-        reviewCount: 34,
-        rating: 4,
-      },
+      property: [],
+      // property: {
+      // imageUrl:
+      //   'http://www.cjem.net/resources/img/201812/english_gem_slider_03.jpg',
+      // imageAlt: 'modern house',
+      // beds: 3,
+      // baths: 2,
+      // title: 'Modern exclutive home in the heart of historic Los Angeles',
+      // priceInCents: 190000,
+      // formattedPrice: '$1,900.00',
+      // reviewCount: 34,
+      // rating: 4,
+      // },
     };
+  },
+  created() {
+    this.property = contentsData;
+  },
+  methods: {
+    detailView(data) {
+      console.log('view clicked', data);
+      this.$modal.show(customModal, data, {
+        clickToClose: false,
+        width: '550px',
+        height: 'auto',
+        name: 'popLayerViewAlbumShot',
+        scrollable: true,
+        adaptive: true,
+      });
+    },
   },
 };
 </script>

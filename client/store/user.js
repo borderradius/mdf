@@ -3,7 +3,8 @@ export const actions = {
     const data = await this.$axios.post('/user/regist', user);
     return data.success;
   },
-  login(user) {
+  // eslint-disable-next-line no-unused-vars
+  login({ state }, user) {
     return this.$auth.loginWith('local', {
       data: user,
     });

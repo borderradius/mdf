@@ -34,7 +34,7 @@
       </div>
     </div>
     <nav :class="isOpen ? 'block' : 'hidden'" class="sm:block">
-      <div class="px-2 pt-2 pb-4 sm:flex sm:p-0">
+      <div v-if="isLoggedIn" class="px-2 pt-2 pb-4 sm:flex sm:p-0">
         <!-- <a
           href="#!"
           class="block px-2 py-1 text-gray-800 font-semibold rounded hover:bg-gray-800 hover:text-white"
@@ -51,6 +51,9 @@
           >Messages</a
         > -->
         <accountDropdown class="hidden sm:block sm:ml-6" />
+      </div>
+      <div v-if="!isLoggedIn">
+        <n-link class="font-semibold text-md" to="signin">Sign in</n-link>
       </div>
       <div class="px-4 py-5 relative border-t border-gray-800 sm:hidden">
         <div @click="isOpen = !isOpen" class="flex items-center">
@@ -81,6 +84,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import accountDropdown from './accountDropdown.vue';
 
 export default {
@@ -92,7 +96,16 @@ export default {
       isOpen: false,
     };
   },
+  computed: {
+    ...mapState({
+      isLoggedIn: state => state.auth.loggedIn,
+    }),
+  },
   methods: {
+    async logout() {
+      await this.$store.dispatch('user/logout');
+      this.$router.push('/');
+    },
     goSignout() {
       this.$router.push('signin');
     },

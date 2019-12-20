@@ -8,7 +8,7 @@ module.exports = {
         NODE_ENV: 'production',
         HOST: '0.0.0.0',
         PORT: '8484',
-        API_URL: 'http://sample.bmaster.kro.kr/',
+        API_URL: 'http://192.168.5.11:8485',
       },
       watch: true,
       exec_mode: 'cluster',

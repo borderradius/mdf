@@ -3,8 +3,8 @@
     <div class="relative pb-5/6">
       <!-- not support IE11 -->
       <img
-        :src="property.imageUrl"
-        :alt="property.imageAlt"
+        :src="require(`@/assets/img/${property.thumbnail}`)"
+        :alt="property.contentsName"
         class="absolute h-full w-full object-cover rounded-lg shadow-md"
       />
     </div>
@@ -66,15 +66,16 @@
             class="text-gray-600 text-sm uppercase font-semibold tracking-wide"
           >
             <!-- {{ property.beds }} beds &bull; {{ property.baths }} baths -->
-            musical english
+            {{ property.project }}
           </div>
         </div>
         <h4 class="mt-1 font-semibold text-lg leading-tight truncate">
           <!-- {{ property.title }} -->
-          Sentence Building
+          {{ property.contentsName }}
         </h4>
         <div class="mt-1 text-gray-500 text-xs">
-          Video / Animation
+          <!-- {{ property.contentsType }} -->
+          {{ strContentsType }}
           <!-- {{ property.formattedPrice }}
           <span class="text-gray-600 text-sm">/ wk</span> -->
         </div>
@@ -93,29 +94,13 @@
           <span class="ml-2 text-gray-600 text-sm"
             >{{ property.reviewCount }} reviews</span
           > -->
-          <!-- <div>
-            <span
-              class="inline-block mr-1 bg-purple-200 text-teal-800 text-xs px-2 rounded-lg"
-              >L</span
-            >
-            <span
-              class="inline-block mr-1 bg-purple-200 text-teal-800 text-xs px-2 rounded-lg"
-              >R</span
-            >
-            <span
-              class="inline-block mr-1 bg-purple-200 text-teal-800 text-xs px-2 rounded-lg"
-              >G</span
-            >
-            <span
-              class="inline-block mr-1 bg-purple-200 text-teal-800 text-xs px-2 rounded-lg"
-              >S</span
-            >
-          </div> -->
           <div class="mt-1 leading-tight">
-            <span class="inline mr-1 text-xs text-gray-600">#Phonics</span>
-            <span class="inline mr-1 text-xs text-gray-600">#Vocabulary</span>
-            <span class="inline mr-1 text-xs text-gray-600">#Sentence</span>
-            <span class="inline mr-1 text-xs text-gray-600">#Paragraph</span>
+            <span
+              v-for="(item, index) in property.contentsElements"
+              :key="index"
+              class="inline mr-1 text-xs text-gray-600"
+              >#{{ item }}</span
+            >
           </div>
         </div>
         <div class="border-t border-gray-400 pt-2 mt-3 overflow-hidden">
@@ -146,13 +131,11 @@
         </div>
       </div>
     </div>
-    <!-- <modal name="hello-world">
-      Hello, world!
-    </modal> -->
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   props: {
     property: {
@@ -163,11 +146,26 @@ export default {
     },
   },
 
+  computed: {
+    ...mapState({
+      isLoggedIn: state => state.auth.loggedIn,
+    }),
+    strContentsType() {
+      const a = this.property.contentsType.join(' / ');
+      return a;
+    },
+  },
+
   methods: {
     show() {
-      if (this.idx === 1) {
-        this.$modal.show('hello-world');
+      if (!this.isLoggedIn) {
+        alert('required login!');
+        return false;
       }
+      this.$emit('showPopup', this.property);
+      // if (this.idx === 1) {
+      //   this.$modal.show('hello-world');
+      // }
     },
   },
 };

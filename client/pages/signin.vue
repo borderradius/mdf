@@ -8,6 +8,7 @@
           </label>
           <input
             id="ID"
+            v-model="user.id"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
             placeholder="Enter ID"
@@ -22,6 +23,7 @@
           </label>
           <input
             id="password"
+            v-model="user.password"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             type="password"
             placeholder="Enter password"
@@ -30,7 +32,7 @@
         </div>
         <div class="flex items-center justify-between">
           <button
-            @click="goSignin"
+            @click="signin"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="button"
           >
@@ -53,9 +55,23 @@
 <script>
 export default {
   layout: 'clear',
+  data() {
+    return {
+      user: {
+        id: 'minigate',
+        password: 'minigate',
+      },
+    };
+  },
   methods: {
-    goSignin() {
-      console.log('signin clicked');
+    async signin() {
+      try {
+        await this.$store.dispatch('user/login', this.user);
+      } catch (e) {
+        alert('로그인 실패');
+        return false;
+      }
+      this.$router.push('/');
     },
   },
 };
