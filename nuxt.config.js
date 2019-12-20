@@ -26,15 +26,47 @@ module.exports = {
     configPath: './tailwind.config.js',
     cssPath: './assets/css/tailwind.css',
   },
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth'],
   // webfontloader: {
   //   google: {
   //     gamilies: ['Lato:400, 700'],
   //   },
   // },
   axios: {
-    // baseURL: process.env.API_URL || 'http://blockchain.minigate.kr:8081',
-    baseURL: process.env.API_URL || 'http://sample.bmaster.kro.kr/',
+    baseURL: process.env.API_URL || 'http://blockchain.minigate.kr:8081',
+    // baseURL: process.env.API_URL || 'http://sample.bmaster.kro.kr/',
+  },
+  router: {
+    // middleware: ['auth', 'route-info', 'study-authenticate', 'browser'],
+    middleware: ['auth'],
+  },
+  auth: {
+    // See https://auth.nuxtjs.org/reference/schemes
+    // scopeKey: "roles",
+    redirect: {
+      login: false,
+      logout: false,
+      home: false,
+    },
+    strategies: {
+      local: {
+        tokenType: 'Bearer',
+        endpoints: {
+          login: {
+            url: '/signin',
+            method: 'post',
+            propertyName: 'result',
+          },
+          logout: false,
+          user: false,
+          // user: {
+          //   url: '/mypage1/profile1',
+          //   method: 'get',
+          //   propertyName: 'result',
+          // },
+        },
+      },
+    },
   },
   build: {
     extend(config, ctx) {

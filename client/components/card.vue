@@ -146,9 +146,9 @@
         </div>
       </div>
     </div>
-    <modal name="hello-world">
+    <!-- <modal name="hello-world">
       Hello, world!
-    </modal>
+    </modal> -->
   </div>
 </template>
 

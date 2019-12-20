@@ -80,10 +80,10 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import { State, Action } from 'vuex-class';
+// import { State, Action } from 'vuex-class';
 import card from '../components/card.vue';
 // eslint-disable-next-line no-unused-vars
-import { User, House } from '../types/index';
+import { User, House, Products } from '../types/index';
 
 @Component({
   // asyncData & fetch 컴포넌트에 입력
@@ -99,10 +99,10 @@ import { User, House } from '../types/index';
   },
 })
 export default class extends Vue {
-  @State(state => state.contents.lists) lists!: any;
-  @Action('contents/lists') loadLists: any;
-  @Action('contents/addContact') addContact: any;
-  @Action('contents/delContact') delContact: any;
+  // @State(state => state.contents.lists) lists!: any;
+  // @Action('contents/lists') loadLists: any;
+  // @Action('contents/addContact') addContact: any;
+  // @Action('contents/delContact') delContact: any;
 
   title: string = 'This is index';
   userInfo: User = {
@@ -124,16 +124,20 @@ export default class extends Vue {
     rating: 4,
   };
 
-  created() {
-    this.loadLists();
-  }
+  products: Products = [
+    { name: 'half shirt1', price: 15000 },
+    { name: 'half shirt2', price: 20000 },
+    { name: 'half shirt3', price: 25000 },
+    { name: 'half shirt4', price: 15000 },
+    { name: 'half shirt5', price: 30000 },
+  ];
 
-  addInfo() {
-    this.addContact(this.userInfo);
-  }
+  // addInfo() {
+  //   this.addContact(this.userInfo);
+  // }
 
-  delInfo(userInfoNo: Number) {
-    this.delContact(userInfoNo);
-  }
+  // delInfo(userInfoNo: Number) {
+  //   this.delContact(userInfoNo);
+  // }
 }
 </script>

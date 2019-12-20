@@ -20,11 +20,16 @@
           project
         </h5>
         <ul class="px-2">
-          <li class="px-2 rounded-lg hover:bg-gray-600">
+          <li class="py-1 px-2 rounded-lg hover:bg-gray-600">
             <label
               class="inline-flex items-center text-gray-500 font-bold cursor-pointer hover:text-white"
             >
-              <input type="checkbox" class="form-checkbox" />
+              <input
+                @change="allCheckChange"
+                type="checkbox"
+                class="form-checkbox"
+                name="project"
+              />
               <span class="ml-2 text-sm uppercase">all</span>
             </label>
           </li>
@@ -36,7 +41,12 @@
             <label
               class="inline-flex items-center text-gray-500 font-bold cursor-pointer hover:text-white"
             >
-              <input type="checkbox" class="form-checkbox" />
+              <input
+                @change="checkChange"
+                type="checkbox"
+                class="form-checkbox"
+                name="project"
+              />
               <span class="ml-2 text-sm uppercase">{{ p }}</span>
             </label>
           </li>
@@ -53,7 +63,12 @@
             <label
               class="inline-flex items-center text-gray-500 font-bold cursor-pointer hover:text-white"
             >
-              <input type="checkbox" class="form-checkbox" />
+              <input
+                @change="allCheckChange"
+                type="checkbox"
+                class="form-checkbox"
+                name="contentsType"
+              />
               <span class="ml-2 text-sm uppercase">all</span>
             </label>
           </li>
@@ -65,7 +80,12 @@
             <label
               class="inline-flex items-center text-gray-500 font-bold cursor-pointer hover:text-white"
             >
-              <input type="checkbox" class="form-checkbox" />
+              <input
+                @change="checkChange"
+                type="checkbox"
+                class="form-checkbox"
+                name="contentsType"
+              />
               <span class="ml-2 text-sm uppercase">{{ t }}</span>
             </label>
           </li>
@@ -82,7 +102,12 @@
             <label
               class="inline-flex items-center text-gray-500 font-bold cursor-pointer hover:text-white"
             >
-              <input type="checkbox" class="form-checkbox" />
+              <input
+                @change="allCheckChange"
+                type="checkbox"
+                class="form-checkbox"
+                name="contentsElements"
+              />
               <span class="ml-2 text-sm uppercase">all</span>
             </label>
           </li>
@@ -94,7 +119,12 @@
             <label
               class="inline-flex items-center text-gray-500 font-bold cursor-pointer hover:text-white"
             >
-              <input type="checkbox" class="form-checkbox" />
+              <input
+                @change="checkChange"
+                type="checkbox"
+                class="form-checkbox"
+                name="contentsElements"
+              />
               <span class="ml-2 text-sm uppercase">{{ e }}</span>
             </label>
           </li>
@@ -111,7 +141,12 @@
             <label
               class="inline-flex items-center text-gray-500 font-bold cursor-pointer hover:text-white"
             >
-              <input type="checkbox" class="form-checkbox" />
+              <input
+                @change="allCheckChange"
+                type="checkbox"
+                class="form-checkbox"
+                name="contentsFields"
+              />
               <span class="ml-2 text-sm uppercase">all</span>
             </label>
           </li>
@@ -123,7 +158,12 @@
             <label
               class="inline-flex items-center text-gray-500 font-bold cursor-pointer hover:text-white"
             >
-              <input type="checkbox" class="form-checkbox" />
+              <input
+                @change="checkChange"
+                type="checkbox"
+                class="form-checkbox"
+                name="contentsFields"
+              />
               <span class="ml-2 text-sm uppercase">{{ f }}</span>
             </label>
           </li>
@@ -146,7 +186,7 @@
 
 <script lang="ts">
 // eslint-disable-next-line no-unused-vars
-import { Vue, Component, Prop, PropSync } from 'vue-property-decorator';
+import { Vue, Component, Prop, PropSync, Watch } from 'vue-property-decorator';
 // eslint-disable-next-line no-unused-vars
 import { State, Action } from 'vuex-class';
 import {
@@ -168,6 +208,40 @@ export default class LeftMenuComponent extends Vue {
   contentsType: string[] = contentsType;
   contentsElements: string[] = contentsElements;
   contentsFields: string[] = contentsFields;
+
+  filter = (f: Function, iter: []) => {
+    const res: [] = [];
+    for (const a of iter) {
+      if (f(a)) res.push(a);
+    }
+    return res;
+  };
+
+  // 모두선택 체크박스
+  allCheckChange(e: any) {
+    const target = document.getElementsByName(e.target.name);
+    const iter = target[Symbol.iterator]();
+    iter.next();
+    for (const a of iter) {
+      a.checked = e.target.checked;
+    }
+  }
+
+  /**
+   * 체크박스 다 선택하면 모두체크박스 true
+   */
+  checkChange(e: any) {
+    const elements = document.getElementsByName(e.target.name);
+    const iter = elements[Symbol.iterator]();
+    iter.next();
+    const trueLength = this.filter(c => c.checked, iter).length;
+
+    if (trueLength === elements.length - 1) {
+      elements[0].checked = true;
+    } else {
+      elements[0].checked = false;
+    }
+  }
 }
 </script>
 

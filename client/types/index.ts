@@ -15,3 +15,8 @@ export interface House {
   reviewCount: number;
   rating: number;
 }
+
+// 배열안의 객체 인터페이스 정의
+export interface Products {
+  [index: number]: { name: string; price: number };
+}
