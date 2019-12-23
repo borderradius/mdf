@@ -20,6 +20,12 @@ export const actions = {
     const { data } = await this.$axios.get('contents/list');
     commit('SET_LISTS', data.result);
   },
+  async search({ commit }, searchParam) {
+    const { data } = await this.$axios.get('contents/search', {
+      params: searchParam,
+    });
+    commit('SET_LISTS', data.result);
+  },
   // async addContact({ dispatch }, userInfo) {
   //   try {
   //     await this.$axios.post('contacts', userInfo);

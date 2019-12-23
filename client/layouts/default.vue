@@ -9,16 +9,19 @@
         <nuxt />
       </div>
     </div>
+    <!-- <mainFooter /> -->
   </div>
 </template>
 
 <script>
 import navbar from '../components/navbar.vue';
+// import mainFooter from '../components/footer.vue';
 import leftMenu from '../components/leftMenu.vue';
 
 export default {
   components: {
     navbar,
+    // mainFooter,
     leftMenu,
   },
 };

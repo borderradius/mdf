@@ -29,6 +29,7 @@
                 type="checkbox"
                 class="form-checkbox"
                 name="project"
+                value="all"
               />
               <span class="ml-2 text-sm uppercase">all</span>
             </label>
@@ -43,6 +44,7 @@
             >
               <input
                 @change="checkChange"
+                :value="p"
                 type="checkbox"
                 class="form-checkbox project"
                 name="project"
@@ -82,8 +84,9 @@
             >
               <input
                 @change="checkChange"
+                :value="t"
                 type="checkbox"
-                class="form-checkbox"
+                class="form-checkbox contentsType"
                 name="contentsType"
               />
               <span class="ml-2 text-sm uppercase">{{ t }}</span>
@@ -121,8 +124,9 @@
             >
               <input
                 @change="checkChange"
+                :value="e"
                 type="checkbox"
-                class="form-checkbox"
+                class="form-checkbox contentsElements"
                 name="contentsElements"
               />
               <span class="ml-2 text-sm uppercase">{{ e }}</span>
@@ -160,8 +164,9 @@
             >
               <input
                 @change="checkChange"
+                :value="f"
                 type="checkbox"
-                class="form-checkbox"
+                class="form-checkbox contentsFields"
                 name="contentsFields"
               />
               <span class="ml-2 text-sm uppercase">{{ f }}</span>
@@ -176,6 +181,7 @@
       class="absolute h-16 bottom-0 bg-gray-900 w-full py-3 px-4"
     >
       <button
+        @click="goSearch"
         class="block text-white bg-indigo-500 px-4 py-2 rounded-lg w-full font-semibold tracking-wider hover:bg-indigo-400 focus:outline-none focus:shadow-outline"
       >
         Search Contents
@@ -192,7 +198,8 @@ import {
   contentsFields,
 } from '../static/leftMenu.js';
 
-import { filter } from '../plugins/fx.js';
+// eslint-disable-next-line no-unused-vars
+import { filter, go, map, toString } from '../plugins/fx.js';
 
 export default {
   data() {
@@ -201,22 +208,23 @@ export default {
       contentsType,
       contentsElements,
       contentsFields,
-      searchParam: [],
+      searchParam: {},
     };
   },
 
   methods: {
     /**
-     * allCheck button click event
+     * 모든체크박스 이벤트
      */
     allCheckChange(e) {
       const iter = document.getElementsByName(e.target.name);
       for (const a of iter) {
         a.checked = e.target.checked;
       }
+      this.setSearchParam(e.target, true);
     },
     /**
-     * individualCheck button click event
+     * 개별체크박스 이벤트
      */
     checkChange(e) {
       const elements = document.getElementsByName(e.target.name);
@@ -229,6 +237,29 @@ export default {
       } else {
         elements[0].checked = false;
       }
+      this.setSearchParam(e.target, false);
+    },
+    /**
+     * 검색조건 세팅
+     */
+    setSearchParam(target, isAll) {
+      const iter = document.getElementsByClassName(target.name);
+
+      const data = go(
+        iter,
+        filter(p => p.checked),
+        map(p => p.value),
+        toString,
+      );
+
+      this.searchParam[`${target.name}`] = data;
+      if (isAll && !target.checked) delete this.searchParam[`${target.name}`];
+    },
+    /**
+     * 검색버튼 클릭
+     */
+    async goSearch() {
+      await this.$store.dispatch('contents/search', this.searchParam);
     },
   },
 };

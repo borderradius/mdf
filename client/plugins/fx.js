@@ -31,4 +31,12 @@ const reduce = curry((f, acc, iter) => {
   return acc;
 });
 
-export { filter, map, reduce, curry };
+const accString = (a, b) => `${a},${b}`;
+
+const go = (...args) => reduce((a, f) => f(a), args);
+
+const pipe = (f, ...fs) => (...as) => go(f(...as), ...fs);
+
+const toString = iter => reduce(accString, iter);
+
+export { filter, map, reduce, curry, go, pipe, toString };
