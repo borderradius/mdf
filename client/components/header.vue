@@ -61,7 +61,87 @@
 </template>
 
 <script>
-export default {};
+// eslint-disable-next-line no-unused-vars
+import { filter, map, reduce, curry } from '../plugins/fx.js';
+export default {
+  data() {
+    return {
+      products: [
+        { name: '반팔티', price: 15000 },
+        { name: '긴팔티', price: 20000 },
+        { name: '핸드폰케이스', price: 15000 },
+        { name: '후드티', price: 30000 },
+        { name: '바지', price: 25000 },
+      ],
+    };
+  },
+  created() {
+    // console.log(map(p => p.price, this.products));
+    const add = (a, b) => a + b;
+    const products = this.products;
+    // GO : 인자를 받아 즉시 값을 평가할 때 사용!!
+    const go = (...args) => {
+      return reduce((a, f) => f(a), args);
+    };
+    console.log(
+      go(
+        0,
+        a => a + 1,
+        a => a + 10,
+        a => a + 100,
+      ),
+    );
+
+    // PIPE : 함수들이 나열되어 있는 함성함수를 만들때 이용
+    const pipe = (...fs) => a => go(a, ...fs);
+
+    const f = pipe(
+      a => a + 1,
+      a => a + 10,
+      a => a + 100,
+    );
+
+    console.log(f(0));
+    console.clear();
+
+    console.log(
+      // eslint-disable-next-line no-shadow
+      go(products, products => filter(p => p.price < 20000, products)),
+      // eslint-disable-next-line no-shadow
+      products => map(p => p.price, products),
+      prices => reduce(add, prices),
+    );
+
+    console.clear();
+
+    /**
+     * CURRY
+     * 받아둔 함수를 원하는 시점에 평가시키는 함수
+     * 함수를 받아서 함수를 리턴하고 인자를 받아서 인자가 원하는 만큼 들어왔을 때 받아둔 함수를 나중에 평가시키는 함수
+     */
+
+    // const mult = curry((a, b) => a * b);
+
+    console.log(
+      go(
+        products,
+        filter(p => p.price < 20000),
+        map(p => p.price),
+        reduce(add),
+      ),
+    );
+
+    // console.log(
+    // reduce(
+    //   add,
+    //   filter(
+    //     n => n < 20000,
+    //     map(p => p.price, this.products),
+    //   ),
+    // ),
+    // );
+  },
+};
 </script>
 
 <style scoped></style>

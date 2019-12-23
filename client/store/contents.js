@@ -17,23 +17,23 @@ export const actions = {
   //   commit('SET_LISTS', data.result);
   // },
   async lists({ commit }) {
-    const { data } = await this.$axios.get('contacts');
-    commit('SET_LISTS', data.contacts);
+    const { data } = await this.$axios.get('contents/list');
+    commit('SET_LISTS', data.result);
   },
-  async addContact({ dispatch }, userInfo) {
-    try {
-      await this.$axios.post('contacts', userInfo);
-      await dispatch('lists');
-    } catch (e) {
-      return e;
-    }
-  },
-  async delContact({ dispatch }, userInfoNo) {
-    try {
-      await this.$axios.delete(`contacts/${userInfoNo}`);
-      await dispatch('lists');
-    } catch (e) {
-      return e;
-    }
-  },
+  // async addContact({ dispatch }, userInfo) {
+  //   try {
+  //     await this.$axios.post('contacts', userInfo);
+  //     await dispatch('lists');
+  //   } catch (e) {
+  //     return e;
+  //   }
+  // },
+  // async delContact({ dispatch }, userInfoNo) {
+  //   try {
+  //     await this.$axios.delete(`contacts/${userInfoNo}`);
+  //     await dispatch('lists');
+  //   } catch (e) {
+  //     return e;
+  //   }
+  // },
 };

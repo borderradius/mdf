@@ -48,13 +48,19 @@
       <p class="text-center text-gray-500 text-xs">
         &copy;2019 Minigate Corp. All rights reserved.
       </p>
+      <!-- <headerC /> -->
     </div>
   </div>
 </template>
 
 <script>
+// import headerC from '../components/header.vue';
+
 export default {
   layout: 'clear',
+  components: {
+    // headerC,
+  },
   data() {
     return {
       user: {

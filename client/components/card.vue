@@ -3,8 +3,8 @@
     <div class="relative pb-5/6">
       <!-- not support IE11 -->
       <img
-        :src="require(`@/assets/img/${property.thumbnail}`)"
-        :alt="property.contentsName"
+        :src="require(`@/assets/img/${contentInfo.thumbnailFileName}`)"
+        :alt="contentInfo.contentsName"
         class="absolute h-full w-full object-cover rounded-lg shadow-md"
       />
     </div>
@@ -66,15 +66,15 @@
             class="text-gray-600 text-sm uppercase font-semibold tracking-wide"
           >
             <!-- {{ property.beds }} beds &bull; {{ property.baths }} baths -->
-            {{ property.project }}
+            {{ contentInfo.projectName }}
           </div>
         </div>
         <h4 class="mt-1 font-semibold text-lg leading-tight truncate">
-          <!-- {{ property.title }} -->
-          {{ property.contentsName }}
+          <!-- {{ contentInfo.title }} -->
+          {{ contentInfo.contentsName }}
         </h4>
         <div class="mt-1 text-gray-500 text-xs">
-          <!-- {{ property.contentsType }} -->
+          <!-- {{ contentInfo.contentsType }} -->
           {{ strContentsType }}
           <!-- {{ property.formattedPrice }}
           <span class="text-gray-600 text-sm">/ wk</span> -->
@@ -96,16 +96,26 @@
           > -->
           <div class="mt-1 leading-tight">
             <span
-              v-for="(item, index) in property.contentsElements"
+              v-for="(item, index) in contentInfo.contentsElements"
               :key="index"
-              class="inline mr-1 text-xs text-gray-600"
+              class="inline-block mr-1 text-xs text-gray-600"
               >#{{ item }}</span
             >
+            <!-- <span class="inline mr-1 text-xs text-gray-600"># Paragraph</span>
+            <span class="inline mr-1 text-xs text-gray-600"># Paragraph</span>
+            <span class="inline mr-1 text-xs text-gray-600"># Paragraph</span>
+            <span class="inline mr-1 text-xs text-gray-600"># Paragraph</span> -->
           </div>
         </div>
         <div class="border-t border-gray-400 pt-2 mt-3 overflow-hidden">
           <div>
             <span
+              v-for="(item, index) in contentInfo.contentsFields"
+              :key="index"
+              class="inline-block mr-1 bg-teal-200 text-teal-800 text-xs px-2 rounded"
+              >{{ item }}</span
+            >
+            <!-- <span
               class="inline-block mr-1 bg-teal-200 text-teal-800 text-xs px-2 rounded"
               >L</span
             >
@@ -120,7 +130,7 @@
             <span
               class="inline-block mr-1 bg-teal-200 text-teal-800 text-xs px-2 rounded"
               >S</span
-            >
+            > -->
           </div>
           <button
             @click="show"
@@ -138,7 +148,7 @@
 import { mapState } from 'vuex';
 export default {
   props: {
-    property: {
+    contentInfo: {
       type: Object,
       default: () => {
         return {};
@@ -151,7 +161,7 @@ export default {
       isLoggedIn: state => state.auth.loggedIn,
     }),
     strContentsType() {
-      const a = this.property.contentsType.join(' / ');
+      const a = this.contentInfo.contentsType.join(' / ');
       return a;
     },
   },
@@ -162,7 +172,8 @@ export default {
         alert('required login!');
         return false;
       }
-      this.$emit('showPopup', this.property);
+      // console.log(this.contentInfo);
+      this.$emit('showPopup', this.contentInfo);
       // if (this.idx === 1) {
       //   this.$modal.show('hello-world');
       // }

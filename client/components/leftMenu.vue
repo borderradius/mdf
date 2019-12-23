@@ -192,6 +192,8 @@ import {
   contentsFields,
 } from '../static/leftMenu.js';
 
+import { filter } from '../plugins/fx.js';
+
 export default {
   data() {
     return {
@@ -199,17 +201,11 @@ export default {
       contentsType,
       contentsElements,
       contentsFields,
+      searchParam: [],
     };
   },
 
   methods: {
-    filter(iter, f) {
-      const res = [];
-      for (const a of iter) {
-        if (f(a)) res.push(a);
-      }
-      return res;
-    },
     /**
      * allCheck button click event
      */
@@ -226,7 +222,7 @@ export default {
       const elements = document.getElementsByName(e.target.name);
       const iter = elements[Symbol.iterator]();
       iter.next();
-      const trueLength = this.filter(iter, c => c.checked).length;
+      const trueLength = filter(c => c.checked, iter).length;
 
       if (trueLength === elements.length - 1) {
         elements[0].checked = true;

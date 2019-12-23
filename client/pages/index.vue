@@ -7,24 +7,19 @@
     </h5>
     <ul class="overflow-hidden">
       <li
-        v-for="(i, index) in property"
+        v-for="(contentInfo, index) in lists"
         :key="index"
-        class="w-1/4 px-4 float-left mb-6"
+        class="w-1/4 px-4 float-left mb-6 h-380"
       >
-        <card :property="i" :idx="index" v-on:showPopup="detailView" />
+        <card
+          :contentInfo="contentInfo"
+          :idx="index"
+          v-on:showPopup="detailView"
+        />
       </li>
-      <!-- <li class="w-1/4 px-4">
-        <card :property="property" />
-      </li>
-      <li class="w-1/4 px-4">
-        <card :property="property" />
-      </li>
-      <li class="w-1/4 px-4">
-        <card :property="property" />
-      </li> -->
     </ul>
-    <modal name="hello-world">
-      Hello, world!
+    <modal width="90%" height="100%" name="contents-detail">
+      <customModal :contentInfo="popupContentInfo" />
     </modal>
   </div>
   <!-- <div class="container"> -->
@@ -86,6 +81,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { contentsData } from '../static/data.js';
 import card from '../components/card.vue';
 import customModal from '../components/customModal.vue';
@@ -93,39 +89,44 @@ import customModal from '../components/customModal.vue';
 export default {
   components: {
     card,
+    customModal,
   },
   data() {
     return {
       property: [],
-      // property: {
-      // imageUrl:
-      //   'http://www.cjem.net/resources/img/201812/english_gem_slider_03.jpg',
-      // imageAlt: 'modern house',
-      // beds: 3,
-      // baths: 2,
-      // title: 'Modern exclutive home in the heart of historic Los Angeles',
-      // priceInCents: 190000,
-      // formattedPrice: '$1,900.00',
-      // reviewCount: 34,
-      // rating: 4,
-      // },
+      popupContentInfo: {},
     };
+  },
+  computed: {
+    ...mapState({
+      lists: state => state.contents.lists,
+    }),
+  },
+  async asyncData({ store }) {
+    await store.dispatch('contents/lists');
   },
   created() {
     this.property = contentsData;
   },
   methods: {
-    detailView(data) {
-      console.log('view clicked', data);
-      this.$modal.show(customModal, data, {
-        clickToClose: false,
-        width: '550px',
-        height: 'auto',
-        name: 'popLayerViewAlbumShot',
-        scrollable: true,
-        adaptive: true,
-      });
+    detailView(contentInfo) {
+      this.popupContentInfo = contentInfo;
+      this.$modal.show('contents-detail');
     },
+    // setBodyScroll(scrollable = true) {
+    //   const body = document.querySelector('body');
+    //   if (scrollable) {
+    //     body.style.position = '';
+    //     body.style.overflow = '';
+    //     body.style.width = '';
+    //     body.style.height = '';
+    //   } else {
+    //     body.style.position = 'fixed';
+    //     body.style.overflow = 'hidden';
+    //     body.style.width = '100%';
+    //     body.style.height = '100%';
+    //   }
+    // },
   },
 };
 </script>
