@@ -8,20 +8,20 @@
       <div class="container p-4">
         <nuxt />
       </div>
+      <mainFooter />
     </div>
-    <!-- <mainFooter /> -->
   </div>
 </template>
 
 <script>
 import navbar from '../components/navbar.vue';
-// import mainFooter from '../components/footer.vue';
+import mainFooter from '../components/mainFooter.vue';
 import leftMenu from '../components/leftMenu.vue';
 
 export default {
   components: {
     navbar,
-    // mainFooter,
+    mainFooter,
     leftMenu,
   },
 };

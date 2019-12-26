@@ -1,23 +1,13 @@
-// eslint-disable-next-line no-shadow
-const curry = f => (a, ..._) => (_.length ? f(a, ..._) : (..._) => f(a, ..._));
+export const L = {};
 
-const filter = curry((f, iter) => {
-  const res = [];
-  for (const a of iter) {
-    if (f(a)) res.push(a);
-  }
-  return res;
-});
+export const add = (a, b) => a + b;
 
-const map = curry((f, iter) => {
-  const res = [];
-  for (const a of iter) {
-    res.push(f(a));
-  }
-  return res;
-});
+export const curry = f => (a, ..._) =>
+  // eslint-disable-next-line no-shadow
+  _.length ? f(a, ..._) : (..._) => f(a, ..._);
 
-const reduce = curry((f, acc, iter) => {
+// 값을 깨져 결과물을 만들어야하기 때문에 연산의 시작을 알리는 함수임.
+export const reduce = curry((f, acc, iter) => {
   if (!iter) {
     // eslint-disable-next-line no-param-reassign
     iter = acc[Symbol.iterator]();
@@ -31,12 +21,63 @@ const reduce = curry((f, acc, iter) => {
   return acc;
 });
 
-const accString = (a, b) => `${a},${b}`;
+export const go = (...args) => reduce((a, f) => f(a), args);
 
-const go = (...args) => reduce((a, f) => f(a), args);
+export const pipe = (f, ...fs) => (...as) => go(f(...as), ...fs);
 
-const pipe = (f, ...fs) => (...as) => go(f(...as), ...fs);
+export const take = curry((l, iter) => {
+  const res = [];
+  for (const a of iter) {
+    res.push(a);
+    if (l === res.length) return res;
+  }
+  return res;
+});
 
-const toString = iter => reduce(accString, iter);
+export const takeAll = take(Infinity);
 
-export { filter, map, reduce, curry, go, pipe, toString };
+export const join = curry((sep = ',', iter) =>
+  reduce((a, b) => `${a}${sep}${b}`, iter),
+);
+
+L.range = function*(l) {
+  let i = -1;
+  while (++i < l) yield i;
+};
+
+L.map = curry(function*(f, iter) {
+  for (const a of iter) yield f(a);
+});
+
+L.filter = curry(function*(f, iter) {
+  for (const a of iter) if (f(a)) yield a;
+});
+
+export const find = curry((f, iter) =>
+  go(iter, L.filter(f), take(1), ([a]) => a),
+);
+
+export const map = curry(pipe(L.map, takeAll));
+
+export const filter = curry(pipe(L.filter, takeAll));
+
+const isIterable = a => a && a[Symbol.iterator];
+L.flatten = function*(iter) {
+  for (const a of iter) {
+    if (isIterable(a)) {
+      for (const b of a) {
+        yield b;
+      }
+    } else yield a;
+  }
+};
+
+// export const filter = curry((f, iter) => {
+//   const res = [];
+//   for (const a of iter) {
+//     if (f(a)) res.push(a);
+//   }
+//   return res;
+// });
+
+// export { filter, map, reduce, curry, go, pipe, join, take, L, add, find };

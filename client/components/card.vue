@@ -52,16 +52,20 @@
       </div>
     </div> -->
     <div class="relative px-2 -mt-16">
+      <div
+        class="hidden absolute w-14 h-14 bg-white top-0 rounded-lg p-2 -mt-10 text-center favorite"
+      >
+        <svg
+          class="h-6 w-6 fill-current m-auto text-yellow-300"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10,1.3l2.388,6.722H18.8l-5.232,3.948l1.871,6.928L10,14.744l-5.438,4.154l1.87-6.928L1.199,8.022h6.412L10,1.3z"
+          />
+        </svg>
+      </div>
       <div class="p-4 bg-white rounded-lg shadow-lg">
         <div class="flex items-center">
-          <!-- <span
-            class="inline-block mr-2 bg-teal-200 text-teal-800 text-xs px-2 rounded-full font-semibold uppercase tracking-wide"
-            >Video</span
-          >
-          <span
-            class="inline-block bg-teal-200 text-teal-800 text-xs px-2 rounded-full font-semibold uppercase tracking-wide"
-            >Animation</span
-          > -->
           <div
             class="text-gray-600 text-sm uppercase font-semibold tracking-wide"
           >
@@ -70,11 +74,9 @@
           </div>
         </div>
         <h4 class="mt-1 font-semibold text-lg leading-tight truncate">
-          <!-- {{ contentInfo.title }} -->
           {{ contentInfo.contentsName }}
         </h4>
         <div class="mt-1 text-gray-500 text-xs">
-          <!-- {{ contentInfo.contentsType }} -->
           {{ strContentsType }}
           <!-- {{ property.formattedPrice }}
           <span class="text-gray-600 text-sm">/ wk</span> -->
@@ -101,10 +103,6 @@
               class="inline-block mr-1 text-xs text-gray-600"
               >#{{ item }}</span
             >
-            <!-- <span class="inline mr-1 text-xs text-gray-600"># Paragraph</span>
-            <span class="inline mr-1 text-xs text-gray-600"># Paragraph</span>
-            <span class="inline mr-1 text-xs text-gray-600"># Paragraph</span>
-            <span class="inline mr-1 text-xs text-gray-600"># Paragraph</span> -->
           </div>
         </div>
         <div class="border-t border-gray-400 pt-2 mt-3 overflow-hidden">
@@ -146,6 +144,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import { join } from '../plugins/fx';
 export default {
   props: {
     contentInfo: {
@@ -161,8 +160,7 @@ export default {
       isLoggedIn: state => state.auth.loggedIn,
     }),
     strContentsType() {
-      const a = this.contentInfo.contentsType.join(' / ');
-      return a;
+      return join('/', this.contentInfo.contentsType);
     },
   },
 
@@ -172,11 +170,7 @@ export default {
         alert('required login!');
         return false;
       }
-      // console.log(this.contentInfo);
       this.$emit('showPopup', this.contentInfo);
-      // if (this.idx === 1) {
-      //   this.$modal.show('hello-world');
-      // }
     },
   },
 };

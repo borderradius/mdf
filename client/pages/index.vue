@@ -6,8 +6,12 @@
       Contents
     </h5>
     <ul class="overflow-hidden">
+      <li v-if="lists.length === 0">
+        <noData />
+      </li>
       <li
         v-for="(contentInfo, index) in lists"
+        v-if="lists.length"
         :key="index"
         class="w-1/4 px-4 float-left mb-6 h-380"
       >
@@ -19,7 +23,7 @@
       </li>
     </ul>
     <modal width="90%" height="100%" name="contents-detail">
-      <customModal :contentInfo="popupContentInfo" />
+      <customModal :contentInfo="popupContentInfo" v-on:close="closeModal" />
     </modal>
   </div>
   <!-- <div class="container"> -->
@@ -85,11 +89,15 @@ import { mapState } from 'vuex';
 import { contentsData } from '../static/data.js';
 import card from '../components/card.vue';
 import customModal from '../components/customModal.vue';
+import noData from '../components/nodata.vue';
+// eslint-disable-next-line no-unused-vars
+import { take, L, go, add, reduce, map } from '../plugins/fx';
 
 export default {
   components: {
     card,
     customModal,
+    noData,
   },
   data() {
     return {
@@ -112,6 +120,9 @@ export default {
     detailView(contentInfo) {
       this.popupContentInfo = contentInfo;
       this.$modal.show('contents-detail');
+    },
+    closeModal() {
+      this.$modal.hide('contents-detail');
     },
     // setBodyScroll(scrollable = true) {
     //   const body = document.querySelector('body');

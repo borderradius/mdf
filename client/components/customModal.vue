@@ -1,9 +1,27 @@
 <template>
-  <div class="">
+  <div class="relative">
+    <div class="absolute bg-white w-full flex items-center mark-header">
+      <h3
+        class="text-3xl text-center text-gray-900 font-semibold align-middle w-10/12 m-auto"
+      >
+        {{ contentInfo.contentsName }}
+      </h3>
+      <button
+        @click="closeModal"
+        class="absolute right-0 mr-2 inline-block bg-indigo-500 
+        text-white px-3 py-0 rounded-lg shadow-lg uppercase 
+        font-semibold text-3xl focus:outline-none focus:shadow-outline"
+      >
+        X
+      </button>
+    </div>
     <iframe
-      :src="`http://210.223.45.236:1010/view?studykey=${studykey}`"
+      id="contentIframe"
+      :src="contentInfo.dataUrl"
+      :width="cWidth"
+      :height="cHeight"
       frameborder="0"
-      class="w-full h-screen"
+      class="m-auto"
     />
     <!-- <button @click="$emit('close')">close</button> -->
   </div>
@@ -23,9 +41,20 @@ export default {
       const rs = temp.split('=');
       return rs[1];
     },
+    cWidth() {
+      return Math.ceil(window.innerHeight * 1.5023) + 'px';
+    },
+    cHeight() {
+      return window.innerHeight;
+    },
   },
-  created() {
-    console.log(this.contentInfo);
+  // mounted() {
+  //   const ifrWindow = document.getElementById('contentIframe');
+  // },
+  methods: {
+    closeModal() {
+      this.$emit('close');
+    },
   },
 };
 </script>

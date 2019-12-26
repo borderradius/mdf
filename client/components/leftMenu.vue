@@ -199,7 +199,7 @@ import {
 } from '../static/leftMenu.js';
 
 // eslint-disable-next-line no-unused-vars
-import { filter, go, map, toString } from '../plugins/fx.js';
+import { filter, go, map, join } from '../plugins/fx.js';
 
 export default {
   data() {
@@ -245,14 +245,12 @@ export default {
     setSearchParam(target, isAll) {
       const iter = document.getElementsByClassName(target.name);
 
-      const data = go(
+      this.searchParam[`${target.name}`] = go(
         iter,
         filter(p => p.checked),
         map(p => p.value),
-        toString,
+        join(','),
       );
-
-      this.searchParam[`${target.name}`] = data;
       if (isAll && !target.checked) delete this.searchParam[`${target.name}`];
     },
     /**

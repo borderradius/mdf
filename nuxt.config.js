@@ -14,9 +14,12 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
-  loading: { color: '#fff' },
+  loading: { color: '#285e61' },
   css: ['~assets/css/tailwind.css', '~assets/scss/index.scss'],
-  plugins: [{ src: '~/plugins/vue-js-modal', ssr: false }],
+  plugins: [
+    { src: '~/plugins/vue-js-modal', ssr: false },
+    // { src: '~/plugins/MGTool', ssr: false },
+  ],
   buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss'],
   tailwindcss: {
     configPath: './tailwind.config.js',
