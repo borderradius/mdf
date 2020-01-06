@@ -7,8 +7,8 @@ module.exports = {
       env: {
         NODE_ENV: 'production',
         HOST: '0.0.0.0',
-        PORT: '8484',
-        API_URL: 'http://192.168.5.11:8485',
+        PORT: '80',
+        API_URL: 'http://210.223.45.233:8485',
       },
       watch: true,
       exec_mode: 'cluster',

@@ -2,7 +2,7 @@ const project = ['kumsung ebp', 'musical english'];
 
 const contentsType = [
   'video lecture',
-  'animation lecture',
+  // 'animation lecture',
   'study activity',
   'game activity',
   'quiz & test',

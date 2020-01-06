@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <div class="absolute bg-white w-full flex items-center mark-header">
+    <!-- <div class="absolute bg-white w-full flex items-center mark-header">
       <h3
         class="text-3xl text-center text-gray-900 font-semibold align-middle w-10/12 m-auto"
       >
@@ -14,7 +14,7 @@
       >
         X
       </button>
-    </div>
+    </div> -->
     <iframe
       id="contentIframe"
       :src="contentInfo.dataUrl"
@@ -42,15 +42,14 @@ export default {
       return rs[1];
     },
     cWidth() {
-      return Math.ceil(window.innerHeight * 1.5023) + 'px';
+      return '1000px';
+      // return Math.ceil(window.innerHeight * 1.5023) + 'px';
     },
     cHeight() {
-      return window.innerHeight;
+      return '562px';
+      // return window.innerHeight;
     },
   },
-  // mounted() {
-  //   const ifrWindow = document.getElementById('contentIframe');
-  // },
   methods: {
     closeModal() {
       this.$emit('close');

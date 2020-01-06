@@ -64,20 +64,26 @@ export const filter = curry(pipe(L.filter, takeAll));
 const isIterable = a => a && a[Symbol.iterator];
 L.flatten = function*(iter) {
   for (const a of iter) {
-    if (isIterable(a)) {
-      for (const b of a) {
-        yield b;
-      }
-    } else yield a;
+    if (isIterable(a)) yield* a;
+    // for (const b of a) {
+    //   yield b;
+    // }
+    // yield* a 는 for (const a of iter) yield val; 과 같음.
+    else yield a;
   }
 };
 
-// export const filter = curry((f, iter) => {
-//   const res = [];
-//   for (const a of iter) {
-//     if (f(a)) res.push(a);
-//   }
-//   return res;
-// });
+export const flatten = pipe(L.flatten, takeAll);
+
+L.deepFlat = function* f(iter) {
+  for (const a of iter) {
+    if (isIterable(a) && typeof a !== 'string') yield* f(a);
+    else yield a;
+  }
+};
+
+L.flatMap = curry(pipe(L.map, L.flatten));
+
+export const flatMap = curry(pipe(L.map, flatten));
 
 // export { filter, map, reduce, curry, go, pipe, join, take, L, add, find };

@@ -2,17 +2,54 @@
   <div id="leftMenu" class="w-1/6 h-screen bg-gray-800">
     <div
       id="leftMenu-header"
-      class="px-4 py-3 h-16 bg-gray-900 text-white border-b border-gray-900"
+      class="px-4 py-3 h-16 bg-white text-white border-r border-gray-300"
     >
-      <h1 class="font-bold text-center text-2xl uppercase">mdf logo</h1>
-      <!-- <img
-        class="h-8 w-full object-center"
-        src="~assets/img/logo.svg"
+      <!-- <h1 class="font-bold text-center text-2xl uppercase">
+        mdf logo
+      </h1> -->
+      <img
+        class="h-full object-center m-auto"
+        src="~assets/img/logo.jpeg"
         alt="logo"
-      /> -->
+      />
     </div>
     <div id="leftMenu-content" class="overflow-y-auto">
       <!-- <div class="overflow-y-auto"> -->
+      <div class="border-b border-gray-900 py-4">
+        <ul class="px-2">
+          <li class="py-1 px-2 rounded-lg hover:bg-gray-600">
+            <label
+              class="inline-flex items-center text-gray-500 font-bold cursor-pointer hover:text-white"
+            >
+              <input
+                @change="getFavorList"
+                type="checkbox"
+                class="form-checkbox"
+                name="favorite"
+              />
+              <span class="ml-2 text-sm uppercase">favorite</span>
+            </label>
+          </li>
+          <!-- <li
+            v-for="(p, index) in project"
+            :key="index"
+            class="py-1 px-2 rounded-lg hover:bg-gray-600"
+          >
+            <label
+              class="inline-flex items-center text-gray-500 font-bold cursor-pointer hover:text-white"
+            >
+              <input
+                @change="checkChange"
+                :value="p"
+                type="checkbox"
+                class="form-checkbox project"
+                name="project"
+              />
+              <span class="ml-2 text-sm uppercase">{{ p }}</span>
+            </label>
+          </li> -->
+        </ul>
+      </div>
       <div class="border-b border-gray-900 py-4">
         <h5
           class="mb-2 text-gray-500 uppercase tracking-wide font-bold text-sm px-4"
@@ -258,6 +295,14 @@ export default {
      */
     async goSearch() {
       await this.$store.dispatch('contents/search', this.searchParam);
+    },
+    /**
+     * 즐찾리스트
+     */
+    async getFavorList(e) {
+      e.target.checked
+        ? await this.$store.dispatch('contents/favorList')
+        : this.goSearch();
     },
   },
 };

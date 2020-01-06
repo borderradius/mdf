@@ -32,7 +32,7 @@ module.exports = {
   //   },
   // },
   axios: {
-    baseURL: process.env.API_URL || 'http://192.168.5.11:8485',
+    baseURL: process.env.API_URL || 'http://210.223.45.233:8485',
     // baseURL: process.env.API_URL || 'http://sample.bmaster.kro.kr/',
   },
   router: {

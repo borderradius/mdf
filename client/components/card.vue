@@ -52,18 +52,22 @@
       </div>
     </div> -->
     <div class="relative px-2 -mt-16">
-      <div
-        class="hidden absolute w-14 h-14 bg-white top-0 rounded-lg p-2 -mt-10 text-center favorite"
+      <a
+        @click="toggleFavor"
+        href="javascript:;"
+        class="absolute w-5 h-5 top-0 right-0 text-center favorite"
       >
         <svg
-          class="h-6 w-6 fill-current m-auto text-yellow-300"
+          ref="favorBtn"
+          :class="isFavor ? 'text-yellow-400' : 'text-gray-400'"
+          class="h-5 w-5 fill-current m-auto"
           viewBox="0 0 20 20"
         >
           <path
             d="M10,1.3l2.388,6.722H18.8l-5.232,3.948l1.871,6.928L10,14.744l-5.438,4.154l1.87-6.928L1.199,8.022h6.412L10,1.3z"
           />
         </svg>
-      </div>
+      </a>
       <div class="p-4 bg-white rounded-lg shadow-lg">
         <div class="flex items-center">
           <div
@@ -145,6 +149,7 @@
 <script>
 import { mapState } from 'vuex';
 import { join } from '../plugins/fx';
+
 export default {
   props: {
     contentInfo: {
@@ -153,6 +158,12 @@ export default {
         return {};
       },
     },
+  },
+
+  data() {
+    return {
+      isFavor: this.contentInfo.isFavor,
+    };
   },
 
   computed: {
@@ -166,11 +177,52 @@ export default {
 
   methods: {
     show() {
-      if (!this.isLoggedIn) {
-        alert('required login!');
-        return false;
+      const popW = 1000;
+      let popH;
+      this.contentInfo.projectName === 'Musical English'
+        ? (popH = Math.ceil((popW / 79) * 50))
+        : (popH = Math.ceil((popW / 6.2) * 4.13));
+
+      const winW = window.screen.width;
+      const winH = window.screen.height;
+      const popX = winW / 2 - popW / 2;
+      const popY = winH / 2 - popH / 2;
+
+      window.open(
+        this.contentInfo.dataUrl,
+        '_blank',
+        `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=${popW}, height=${popH}, left=${popX} top=${popY}`,
+      );
+      // if (!this.isLoggedIn) {
+      //   alert('required login!');
+      //   return false;
+      // }
+      // this.$emit('showPopup', this.contentInfo);
+    },
+
+    /**
+     * 즐찾상태이면 즐찾해제
+     * 즐찾해제상태면 즐찾추가
+     */
+    toggleFavor() {
+      let goPath;
+      this.isFavor = !this.isFavor;
+      // console.log(this.isFavor);
+      // const favorBtn = this.$refs.favorBtn;
+      // const favorState = favorBtn.classList.contains('text-yellow-400');
+      // 없으면 주고 있으면 빼.
+      if (!this.isFavor) {
+        // favorBtn.classList.remove('text-yellow-400');
+        goPath = 'delete';
+      } else {
+        // favorBtn.classList.add('text-yellow-400');
+        goPath = 'add';
       }
-      this.$emit('showPopup', this.contentInfo);
+      // 즐찾 add, delete 해
+      this.$store.dispatch(`contents/${goPath}Favor`, {
+        projectName: this.contentInfo.projectName,
+        contentsNo: this.contentInfo.contentsNo,
+      });
     },
   },
 };

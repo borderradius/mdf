@@ -86,12 +86,11 @@
 
 <script>
 import { mapState } from 'vuex';
-import { contentsData } from '../static/data.js';
 import card from '../components/card.vue';
 import customModal from '../components/customModal.vue';
 import noData from '../components/nodata.vue';
 // eslint-disable-next-line no-unused-vars
-import { take, L, go, add, reduce, map } from '../plugins/fx';
+import { take, L, go, add, reduce, map, flatten } from '../plugins/fx';
 
 export default {
   components: {
@@ -112,9 +111,6 @@ export default {
   },
   async asyncData({ store }) {
     await store.dispatch('contents/lists');
-  },
-  created() {
-    this.property = contentsData;
   },
   methods: {
     detailView(contentInfo) {
