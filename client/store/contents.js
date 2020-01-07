@@ -1,3 +1,5 @@
+// import { go, filter } from '../plugins/fx';
+
 export const state = () => {
   return {
     lists: [],
@@ -7,10 +9,41 @@ export const state = () => {
 
 export const mutations = {
   SET_LISTS(state, payload) {
-    state.lists = Object.freeze(payload);
+    state.lists = payload;
   },
   SET_SEARCH_PARAM(state, payload) {
     state.searchParam = payload;
+  },
+  SET_IS_FAVOR(state, payload) {
+    // const changedCard = go(
+    //   state.lists,
+    //   filter(
+    //     l =>
+    //       l.contentsNo === payload.contentsNo &&
+    //       l.projectName === payload.projectName,
+    //   ),
+    // );
+    // console.log(changedCard);
+    // console.log(state.lists);
+    for (const a of state.lists) {
+      if (
+        a.contentsNo === payload.contentsNo &&
+        a.projectName === payload.projectName
+      ) {
+        a.isFavor = payload.isFavor;
+      }
+    }
+    // console.log(state.lists);
+    // console.log(
+    //   go(
+    //     state.lists,
+    //     filter(
+    //       l =>
+    //         l.contentsNo === payload.contentsNo &&
+    //         l.projectName === payload.projectName,
+    //     ),
+    //   ),
+    // );
   },
 };
 
@@ -33,11 +66,13 @@ export const actions = {
   },
   async addFavor(context, contentInfo) {
     await this.$axios.post('favorite/addContent', contentInfo);
-    // dispatch('search', getters.GET_SEARCH_PARAM);
+    // context.dispatch('search', getters.GET_SEARCH_PARAM);
+    context.commit('SET_IS_FAVOR', contentInfo);
   },
   async deleteFavor(context, contentInfo) {
     await this.$axios.post('favorite/deleteContent', contentInfo);
-    // dispatch('search', getters.GET_SEARCH_PARAM);
+    // context.dispatch('search', getters.GET_SEARCH_PARAM);
+    context.commit('SET_IS_FAVOR', contentInfo);
   },
   async favorList({ commit }) {
     const { data } = await this.$axios.get('favorite/list');

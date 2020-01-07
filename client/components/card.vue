@@ -59,8 +59,8 @@
       >
         <svg
           ref="favorBtn"
-          :class="isFavor ? 'text-yellow-400' : 'text-gray-400'"
-          class="h-5 w-5 fill-current m-auto"
+          :class="contentInfo.isFavor ? 'text-yellow-400' : 'text-gray-400'"
+          class="h-5 w-5 fill-current m-auto "
           viewBox="0 0 20 20"
         >
           <path
@@ -162,7 +162,7 @@ export default {
 
   data() {
     return {
-      isFavor: this.contentInfo.isFavor,
+      isFavor: false,
     };
   },
 
@@ -173,6 +173,21 @@ export default {
     strContentsType() {
       return join('/', this.contentInfo.contentsType);
     },
+  },
+
+  // watch: {
+  //   contentInfo() {
+  //     this.$nextTick(function() {
+  //       this.isFavor = this.contentInfo.isFavor;
+  //     });
+  //   },
+  // },
+  updated() {
+    console.log('updated');
+    this.isFavor = this.contentInfo.isFavor;
+    // this.$nextTick(function() {
+    //   this.isFavor = this.contentInfo.isFavor;
+    // });
   },
 
   methods: {
@@ -205,24 +220,16 @@ export default {
      * 즐찾해제상태면 즐찾추가
      */
     toggleFavor() {
-      let goPath;
       this.isFavor = !this.isFavor;
-      // console.log(this.isFavor);
-      // const favorBtn = this.$refs.favorBtn;
-      // const favorState = favorBtn.classList.contains('text-yellow-400');
-      // 없으면 주고 있으면 빼.
-      if (!this.isFavor) {
-        // favorBtn.classList.remove('text-yellow-400');
-        goPath = 'delete';
-      } else {
-        // favorBtn.classList.add('text-yellow-400');
-        goPath = 'add';
-      }
+      let goPath;
       // 즐찾 add, delete 해
+      this.isFavor ? (goPath = 'add') : (goPath = 'delete');
       this.$store.dispatch(`contents/${goPath}Favor`, {
         projectName: this.contentInfo.projectName,
         contentsNo: this.contentInfo.contentsNo,
+        isFavor: this.isFavor,
       });
+      // this.$emit('addFavor', this.contentInfo);
     },
   },
 };

@@ -21,6 +21,7 @@
           v-on:showPopup="detailView"
         />
       </li>
+      <!-- v-on:addFavor="addFavor" -->
     </ul>
     <modal width="90%" height="100%" name="contents-detail">
       <customModal :contentInfo="popupContentInfo" v-on:close="closeModal" />
@@ -120,6 +121,10 @@ export default {
     closeModal() {
       this.$modal.hide('contents-detail');
     },
+    // addFavor(content) {
+    //   console.log(content);
+    //   console.log(this.lists);
+    // },
     // setBodyScroll(scrollable = true) {
     //   const body = document.querySelector('body');
     //   if (scrollable) {
