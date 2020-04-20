@@ -37,25 +37,28 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-shadow': ['error', { allow: ['state'] }],
-    'no-param-reassign': [
-      'error',
-      {
-        props: true,
-        ignorePropertyModificationsFor: [
-          'state',
-          'acc',
-          'e',
-          'ctx',
-          'context',
-          'req',
-          'request',
-          'res',
-          'response',
-          '$scope',
-        ],
-      },
-    ],
-    "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false, "caughtErrors": "none" }]
+    "no-param-reassign": 0,
+    'no-undef': 'off',
+    // 'no-param-reassign': [
+    //   'error',
+    //   {
+    //     props: true,
+    //     ignorePropertyModificationsFor: [
+    //       'state',
+    //       'acc',
+    //       'e',
+    //       'ctx',
+    //       'context',
+    //       'req',
+    //       'request',
+    //       'res',
+    //       'response',
+    //       '$scope',
+    //     ],
+    //   },
+    // ],
+    "no-unused-vars": ["error", {"args":"none"}]
+    // "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false, "caughtErrors": "none" }]
     // "no-unused-vars": ["error", { "varsIgnorePattern": "^map" }]
   },
 

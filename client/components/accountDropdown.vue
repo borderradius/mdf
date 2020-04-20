@@ -2,13 +2,14 @@
   <div class="relative">
     <button
       @click="isOpen = !isOpen"
-      class="relative z-10 block h-8 w-8 rounded-full overflow-hidden border-2 border-gray-600 focus:outline-none focus:border-white"
+      class="relative z-10 block h-8 w-8 rounded-full overflow-hidden border-2 border-red-400 focus:outline-none focus:border-red-400 bg-red-400 text-white font-semibold hover:bg-red-500 hover:border-red-500"
     >
-      <img
+      <span class="h-full w-full object-cover">C</span>
+      <!-- <img
         class="h-full w-full object-cover"
         src="https://i.pinimg.com/originals/c8/14/99/c814995b86a60232c93492f5c90c0570.jpg"
         alt="avatar"
-      />
+      /> -->
     </button>
     <button
       v-if="isOpen"

@@ -17,19 +17,38 @@
       <!-- <div class="overflow-y-auto"> -->
       <div class="border-b border-gray-900 py-4">
         <ul class="px-2">
-          <li class="py-1 px-2 rounded-lg hover:bg-gray-600">
+          <li
+            v-for="(p, index) in favorite"
+            :key="index"
+            class="py-1 px-2 rounded-lg hover:bg-gray-600"
+          >
+            <label
+              class="inline-flex items-center text-gray-500 font-bold cursor-pointer hover:text-white"
+            >
+              <input
+                @change="checkChange"
+                :value="p"
+                type="checkbox"
+                class="form-checkbox favorite"
+                name="favorite"
+              />
+              <span class="ml-2 text-sm uppercase">{{ p }}</span>
+            </label>
+          </li>
+          <!-- <li class="py-1 px-2 rounded-lg hover:bg-gray-600">
             <label
               class="inline-flex items-center text-gray-500 font-bold cursor-pointer hover:text-white"
             >
               <input
                 @change="getFavorList"
+                value="favorite"
                 type="checkbox"
-                class="form-checkbox"
+                class="form-checkbox favorite"
                 name="favorite"
               />
               <span class="ml-2 text-sm uppercase">favorite</span>
             </label>
-          </li>
+          </li> -->
           <!-- <li
             v-for="(p, index) in project"
             :key="index"
@@ -72,7 +91,7 @@
             </label>
           </li>
           <li
-            v-for="(p, index) in project"
+            v-for="(p, index) in projectList"
             :key="index"
             class="py-1 px-2 rounded-lg hover:bg-gray-600"
           >
@@ -228,19 +247,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import {
+  favorite,
   project,
   contentsType,
   contentsElements,
   contentsFields,
 } from '../static/leftMenu.js';
-
 // eslint-disable-next-line no-unused-vars
 import { filter, go, map, join } from '../plugins/fx.js';
+
+// eslint-disable-next-line no-unused-vars
+// const fetchData = async store => {
+//   await store.dispatch('library/findGrammar');
+// };
 
 export default {
   data() {
     return {
+      favorite,
       project,
       contentsType,
       contentsElements,
@@ -248,7 +274,15 @@ export default {
       searchParam: {},
     };
   },
-
+  computed: {
+    ...mapState({
+      projectList: state => state.leftMenu.projectList,
+    }),
+  },
+  mounted() {
+    // console.log(fetchData);
+    this.$store.dispatch('leftMenu/getProjectList');
+  },
   methods: {
     /**
      * 모든체크박스 이벤트
@@ -266,13 +300,15 @@ export default {
     checkChange(e) {
       const elements = document.getElementsByName(e.target.name);
       const iter = elements[Symbol.iterator]();
-      iter.next();
-      const trueLength = filter(c => c.checked, iter).length;
+      if (elements.length - 1) {
+        iter.next();
+        const trueLength = filter(c => c.checked, iter).length;
 
-      if (trueLength === elements.length - 1) {
-        elements[0].checked = true;
-      } else {
-        elements[0].checked = false;
+        if (trueLength === elements.length - 1) {
+          elements[0].checked = true;
+        } else {
+          elements[0].checked = false;
+        }
       }
       this.setSearchParam(e.target, false);
     },
@@ -299,11 +335,11 @@ export default {
     /**
      * 즐찾리스트
      */
-    async getFavorList(e) {
-      e.target.checked
-        ? await this.$store.dispatch('contents/favorList')
-        : this.goSearch();
-    },
+    // async getFavorList(e) {
+    //   e.target.checked
+    //     ? await this.$store.dispatch('contents/favorList')
+    //     : this.goSearch();
+    // },
   },
 };
 </script>

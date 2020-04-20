@@ -18,7 +18,7 @@ module.exports = {
   css: ['~assets/css/tailwind.css', '~assets/scss/index.scss'],
   plugins: [
     { src: '~/plugins/vue-js-modal', ssr: false },
-    // { src: '~/plugins/MGTool', ssr: false },
+    { src: '~/plugins/vue-plyr', ssr: false },
   ],
   buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss'],
   tailwindcss: {
@@ -31,6 +31,10 @@ module.exports = {
   //     gamilies: ['Lato:400, 700'],
   //   },
   // },
+  server: {
+    host: '0.0.0.0',
+    port: '3232',
+  },
   axios: {
     baseURL: process.env.API_URL || 'http://210.223.45.233:8485',
     // baseURL: process.env.API_URL || 'http://sample.bmaster.kro.kr/',

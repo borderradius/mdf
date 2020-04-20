@@ -24,6 +24,7 @@
           <input
             id="password"
             v-model="user.password"
+            v-on:keyup.enter="signin"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             type="password"
             placeholder="Enter password"
@@ -64,8 +65,8 @@ export default {
   data() {
     return {
       user: {
-        id: 'minigate',
-        password: 'minigate',
+        id: '',
+        password: '',
       },
     };
   },

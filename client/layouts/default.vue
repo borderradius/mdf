@@ -5,7 +5,7 @@
     </div>
     <div class="w-5/6">
       <navbar />
-      <div class="container p-4">
+      <div v-on:contextmenu.prevent="ctxStop" class="container p-4">
         <nuxt />
       </div>
       <mainFooter />
@@ -23,6 +23,11 @@ export default {
     navbar,
     mainFooter,
     leftMenu,
+  },
+  methods: {
+    ctxStop() {
+      // console.log('??');
+    },
   },
 };
 </script>

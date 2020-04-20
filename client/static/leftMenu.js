@@ -1,8 +1,10 @@
-const project = ['kumsung ebp', 'musical english'];
+const favorite = ['favorite'];
+
+const project = ['kumsung ebp', 'musical english', "yoon's smart land"];
 
 const contentsType = [
   'video lecture',
-  // 'animation lecture',
+  'animation lecture',
   'study activity',
   'game activity',
   'quiz & test',
@@ -19,4 +21,4 @@ const contentsFields = [
   'etc',
 ];
 
-export { project, contentsType, contentsElements, contentsFields };
+export { project, contentsType, contentsElements, contentsFields, favorite };

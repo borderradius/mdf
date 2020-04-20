@@ -3,10 +3,16 @@
     <div class="relative pb-5/6">
       <!-- not support IE11 -->
       <img
+        :alt="contentInfo.contentsName"
+        :src="`img/${contentInfo.thumbnailFileName}`"
+        class="absolute h-full
+      w-full object-cover rounded-lg shadow-md"
+      />
+      <!-- <img
         :src="require(`@/assets/img/${contentInfo.thumbnailFileName}`)"
         :alt="contentInfo.contentsName"
         class="absolute h-full w-full object-cover rounded-lg shadow-md"
-      />
+      /> -->
     </div>
     <!-- support IE11 -->
     <!-- <div
@@ -55,7 +61,7 @@
       <a
         @click="toggleFavor"
         href="javascript:;"
-        class="absolute w-5 h-5 top-0 right-0 text-center favorite"
+        class="absolute w-5 h-5 top-0 right-0 text-center favorite-icon"
       >
         <svg
           ref="favorBtn"
@@ -183,7 +189,7 @@ export default {
   //   },
   // },
   updated() {
-    console.log('updated');
+    // console.log('updated');
     this.isFavor = this.contentInfo.isFavor;
     // this.$nextTick(function() {
     //   this.isFavor = this.contentInfo.isFavor;
@@ -203,11 +209,22 @@ export default {
       const popX = winW / 2 - popW / 2;
       const popY = winH / 2 - popH / 2;
 
-      window.open(
-        this.contentInfo.dataUrl,
-        '_blank',
-        `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=${popW}, height=${popH}, left=${popX} top=${popY}`,
-      );
+      const hasYsl = this.contentInfo.dataUrl.split('/');
+      console.log(hasYsl);
+      if (hasYsl[3] !== 'ysl') {
+        window.open(
+          this.contentInfo.dataUrl,
+          '_blank',
+          `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=${popW}, height=${popH}, left=${popX} top=${popY}`,
+        );
+      } else {
+        window.open(
+          `http://210.223.45.233/yslVideo?fileName=${hasYsl[4]}`,
+          '_blank',
+          `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1268, height=714, left=${popX} top=${popY}`,
+        );
+      }
+
       // if (!this.isLoggedIn) {
       //   alert('required login!');
       //   return false;
@@ -234,5 +251,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

@@ -4,7 +4,7 @@
   >
     <div class="flex items-center justify-between px-4 py-3 sm:p-0">
       <div>
-        <h1 class="font-bold text-center text-md">
+        <h1 class="font-bold text-center text-lg">
           Minigate Digital contents Library
         </h1>
         <!-- <img class="h-8" src="~assets/img/logo.svg" alt="logo" /> -->

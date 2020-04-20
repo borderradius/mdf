@@ -11,10 +11,12 @@
       </li>
       <li
         v-for="(contentInfo, index) in lists"
-        v-if="lists.length"
+        v-else="lists.length"
         :key="index"
         class="w-1/4 px-4 float-left mb-6 h-380"
       >
+        <!-- 즐겨찾기만 보여주기
+        :class="{ hidden: !contentInfo.isFavor }" -->
         <card
           :contentInfo="contentInfo"
           :idx="index"
@@ -112,6 +114,10 @@ export default {
   },
   async asyncData({ store }) {
     await store.dispatch('contents/lists');
+  },
+  mounted() {
+    // await this.$store.dispatch('contents/lists');
+    console.log(this.lists);
   },
   methods: {
     detailView(contentInfo) {
