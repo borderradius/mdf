@@ -33,7 +33,7 @@ module.exports = {
   // },
   server: {
     host: '0.0.0.0',
-    port: '3333',
+    port: '3232',
   },
   axios: {
     baseURL: process.env.API_URL || 'http://210.223.45.233:8485',

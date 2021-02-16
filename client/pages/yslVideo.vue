@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="plyr-wrapper">
     <vue-plyr>
       <video :src="dataUrl">
         <source :src="dataUrl" type="video/mp4" />
@@ -28,3 +28,8 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.plyr-wrapper {
+  height: 200px !important;
+}
+</style>

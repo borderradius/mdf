@@ -198,32 +198,19 @@ export default {
 
   methods: {
     show() {
-      let popW;
+      const popW = 1000;
       let popH;
-
-      // ? (popH = Math.ceil((popW / 79) * 50))
-      // : (popH = Math.ceil((popW / 6.2) * 4.13));
-
-      if (this.contentInfo.projectName === 'Musical English') {
-        popW = 1000;
-        popH = Math.ceil((popW / 79) * 50);
-      } else {
-        popH = 800;
-        popW = Math.ceil(popH * 1.6);
-      }
+      this.contentInfo.projectName === 'Musical English'
+        ? (popH = Math.ceil((popW / 79) * 50))
+        : (popH = Math.ceil((popW / 6.2) * 4.13));
 
       const winW = window.screen.width;
       const winH = window.screen.height;
       const popX = winW / 2 - popW / 2;
       const popY = winH / 2 - popH / 2;
-      /**
-       * MEW 일경우와 아닐경우
-       */
-      // if(this.contentInfo.projectName === 'Musical English'){
 
-      // }
       const hasYsl = this.contentInfo.dataUrl.split('/');
-      // console.log(hasYsl);
+      console.log(hasYsl);
       if (hasYsl[3] !== 'ysl') {
         window.open(
           this.contentInfo.dataUrl,
@@ -232,10 +219,10 @@ export default {
         );
       } else {
         window.open(
-          // `http://localhost:3232/yslVideo?fileName=${hasYsl[4]}`,
-          `http://210.223.45.233/yslVideo?fileName=${hasYsl[4]}`,
+          `http://localhost:3232/yslVideo?fileName=${hasYsl[4]}`,
+          // `http://210.223.45.233/yslVideo?fileName=${hasYsl[4]}`,
           '_blank',
-          `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1268, height=714, left=${popX} top=${popY}`,
+          `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=${popW}, height=${popH}, left=${popX} top=${popY}`,
         );
         // width=1268, height=800,
       }

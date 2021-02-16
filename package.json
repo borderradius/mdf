@@ -1,5 +1,5 @@
 {
-  "name": "MDF",
+  "name": "mdf",
   "version": "1.0.0",
   "description": "My top-notch Nuxt.js project",
   "author": "spacemonkey",
@@ -8,7 +8,7 @@
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
     "start": "cross-env NODE_ENV=production node server/index.js",
     "build:csr": "nuxt generate",
-    "build:ssr": "nuxt build",
+    "build": "nuxt build",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:fix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },

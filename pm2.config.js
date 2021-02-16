@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'MDF',
+      name: 'mdf',
       cwd: __dirname,
       script: './server',
       env: {
